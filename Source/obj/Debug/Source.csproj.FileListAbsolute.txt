@@ -1,0 +1,5 @@
+C:\git\Turnable\Source\bin\Debug\Turnable.dll
+C:\git\Turnable\Source\bin\Debug\Turnable.pdb
+C:\git\Turnable\Source\obj\Debug\Source.csprojResolveAssemblyReference.cache
+C:\git\Turnable\Source\obj\Debug\Turnable.dll
+C:\git\Turnable\Source\obj\Debug\Turnable.pdb

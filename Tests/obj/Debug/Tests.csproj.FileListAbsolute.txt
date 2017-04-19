@@ -1,0 +1,8 @@
+C:\git\Turnable\Tests\bin\Debug\Tests.dll
+C:\git\Turnable\Tests\bin\Debug\Tests.pdb
+C:\git\Turnable\Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\git\Turnable\Tests\bin\Debug\nunit.framework.dll
+C:\git\Turnable\Tests\bin\Debug\nunit.framework.xml
+C:\git\Turnable\Tests\obj\Debug\Tests.csprojResolveAssemblyReference.cache
+C:\git\Turnable\Tests\obj\Debug\Tests.dll
+C:\git\Turnable\Tests\obj\Debug\Tests.pdb
