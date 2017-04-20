@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using NUnit.Framework.Constraints;
+using Turnable.Tiled;
 
 namespace Tests.Tiled
 {
@@ -11,6 +11,7 @@ namespace Tests.Tiled
         {
             Map map = Map.Load("");
 
+            Assert.IsNotNull(map);
 
         }
     }

@@ -5,7 +5,11 @@ using System.Text;
 
 namespace Turnable.Tiled
 {
-    class Map
+    public class Map
     {
+        public static Map Load(string fullPath)
+        {
+            return null;
+        }
     }
 }
