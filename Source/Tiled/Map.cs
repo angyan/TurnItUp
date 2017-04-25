@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Xml;
 
 namespace Turnable.Tiled
 {
@@ -18,8 +15,15 @@ namespace Turnable.Tiled
 
         public static Map Load(string fullPath)
         {
+            var map = new Map();
+            var tiledMapDocument = new XmlDocument();
+            tiledMapDocument.Load(fullPath);
+
             // REF: http://doc.mapeditor.org/reference/tmx-map-format/#map
-            return new Map();
+            var mapNode = tiledMapDocument.DocumentElement.SelectSingleNode("map");
+            map.Version = mapNode.Attributes["version"].Value;
+
+            return map;
         }
     }
 }

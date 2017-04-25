@@ -45,3 +45,7 @@ _ReSharper*/
 *.[Cc]ache
 # but keep track of directories ending in .cache
 !*.[Cc]ache/
+
+# Upgrade logs and backups
+Backup*/
+UpgradeLog*.htm
