@@ -49,3 +49,6 @@ _ReSharper*/
 # Upgrade logs and backups
 Backup*/
 UpgradeLog*.htm
+
+# NCrunch
+*ncrunch*

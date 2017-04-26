@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System;
+using System.Xml;
 
 namespace Turnable.Tiled
 {
@@ -20,7 +21,10 @@ namespace Turnable.Tiled
             tiledMapDocument.Load(fullPath);
 
             // REF: http://doc.mapeditor.org/reference/tmx-map-format/#map
-            var mapNode = tiledMapDocument.DocumentElement.SelectSingleNode("map");
+            var mapNode = tiledMapDocument.DocumentElement.SelectSingleNode("/map");
+            Console.WriteLine(mapNode.Attributes);
+            map.Version = mapNode.Attributes["version"].Value;
+            map.Width = (int)(mapNode.Attributes["width"].Value);
             map.Version = mapNode.Attributes["version"].Value;
 
             return map;
