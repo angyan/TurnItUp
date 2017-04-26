@@ -22,10 +22,12 @@ namespace Turnable.Tiled
 
             // REF: http://doc.mapeditor.org/reference/tmx-map-format/#map
             var mapNode = tiledMapDocument.DocumentElement.SelectSingleNode("/map");
-            Console.WriteLine(mapNode.Attributes);
             map.Version = mapNode.Attributes["version"].Value;
-            map.Width = (int)(mapNode.Attributes["width"].Value);
-            map.Version = mapNode.Attributes["version"].Value;
+            map.Width = Convert.ToInt32(mapNode.Attributes["width"].Value);
+            map.Height = Convert.ToInt32(mapNode.Attributes["height"].Value);
+            map.TileWidth = Convert.ToInt32(mapNode.Attributes["tilewidth"].Value);
+            map.TileHeight = Convert.ToInt32(mapNode.Attributes["tileheight"].Value);
+            map.NextObjectId = Convert.ToInt32(mapNode.Attributes["nextobjectid"].Value);
 
             return map;
         }

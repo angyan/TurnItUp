@@ -21,10 +21,10 @@ namespace Tests.Tiled
             Assert.AreEqual(Orientation.Orthogonal, map.Orientation);
             Assert.AreEqual(RenderOrder.RightDown, map.RenderOrder);
             Assert.AreEqual(45, map.Width);
-            //Assert.AreEqual(31, map.Height);
-            //Assert.AreEqual(16, map.TileWidth);
-            //Assert.AreEqual(16, map.TileHeight);
-            //Assert.AreEqual(37, map.NextObjectId);
+            Assert.AreEqual(31, map.Height);
+            Assert.AreEqual(16, map.TileWidth);
+            Assert.AreEqual(16, map.TileHeight);
+            Assert.AreEqual(37, map.NextObjectId);
         }
     }
 }
