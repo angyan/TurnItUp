@@ -15,6 +15,7 @@ namespace Turnable.Tiled
         public int TileWidth { get; set; }
         public int TileHeight { get; set; }
         public int NextObjectId { get; set; }
+        public PropertyDictionary Properties { get; set; }
 
         public static Map Load(string fullPath)
         {
@@ -22,14 +23,17 @@ namespace Turnable.Tiled
             var tiledMapDocument = XDocument.Load(fullPath);
 
             // REF: http://doc.mapeditor.org/reference/tmx-map-format/#map
+            // Load attributes for map
             var mapNode = tiledMapDocument.Elements("map").Single();
-
             map.Version = mapNode.Attribute("version").Value;
             map.Width = Convert.ToInt32(mapNode.Attribute("width").Value);
             map.Height = Convert.ToInt32(mapNode.Attribute("height").Value);
             map.TileWidth = Convert.ToInt32(mapNode.Attribute("tilewidth").Value);
             map.TileHeight = Convert.ToInt32(mapNode.Attribute("tileheight").Value);
             map.NextObjectId = Convert.ToInt32(mapNode.Attribute("nextobjectid").Value);
+
+            // Load properties for map
+            map.Properties = new PropertyDictionary(mapNode.Descendants("properties").Single());
 
             return map;
         }

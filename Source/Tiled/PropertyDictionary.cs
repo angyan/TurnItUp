@@ -18,6 +18,11 @@ namespace Turnable.Tiled
             Console.WriteLine(properties.Descendants().Count<XElement>());
             foreach (XElement property in properties.Descendants())
             {
+                string name = property.Attribute("name").Value;
+                string value = property.Attribute("value").Value;
+                PropertyType propertyType = (PropertyType)Enum.Parse(typeof(PropertyType), property.Attribute("type").Value, true);
+
+                this[name] = new Property(name, value, propertyType);
             }
         }
     }

@@ -16,6 +16,7 @@ namespace Tests.Tiled
 
             var map = Map.Load(fullPath);
 
+            // Are map attributes correctly set?
             Assert.That(map, Is.Not.Null);
             Assert.That(map.Version, Is.EqualTo("1.0"));
             Assert.That(map.Orientation, Is.EqualTo(Orientation.Orthogonal));
@@ -25,6 +26,8 @@ namespace Tests.Tiled
             Assert.That(map.TileWidth, Is.EqualTo(16));
             Assert.That(map.TileHeight, Is.EqualTo(16));
             Assert.That(map.NextObjectId, Is.EqualTo(37));
+            // Are the properties for the map correctly set?
+            Assert.That(map.Properties, Is.Not.Null);
         }
     }
 }
