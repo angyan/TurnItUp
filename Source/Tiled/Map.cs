@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace Turnable.Tiled
 {
@@ -17,17 +19,17 @@ namespace Turnable.Tiled
         public static Map Load(string fullPath)
         {
             var map = new Map();
-            var tiledMapDocument = new XmlDocument();
-            tiledMapDocument.Load(fullPath);
+            var tiledMapDocument = XDocument.Load(fullPath);
 
             // REF: http://doc.mapeditor.org/reference/tmx-map-format/#map
-            var mapNode = tiledMapDocument.DocumentElement.SelectSingleNode("/map");
-            map.Version = mapNode.Attributes["version"].Value;
-            map.Width = Convert.ToInt32(mapNode.Attributes["width"].Value);
-            map.Height = Convert.ToInt32(mapNode.Attributes["height"].Value);
-            map.TileWidth = Convert.ToInt32(mapNode.Attributes["tilewidth"].Value);
-            map.TileHeight = Convert.ToInt32(mapNode.Attributes["tileheight"].Value);
-            map.NextObjectId = Convert.ToInt32(mapNode.Attributes["nextobjectid"].Value);
+            var mapNode = tiledMapDocument.Elements("map").Single();
+
+            map.Version = mapNode.Attribute("version").Value;
+            //map.Width = Convert.ToInt32(mapNode.Attributes["width"].Value);
+            //map.Height = Convert.ToInt32(mapNode.Attributes["height"].Value);
+            //map.TileWidth = Convert.ToInt32(mapNode.Attributes["tilewidth"].Value);
+            //map.TileHeight = Convert.ToInt32(mapNode.Attributes["tileheight"].Value);
+            //map.NextObjectId = Convert.ToInt32(mapNode.Attributes["nextobjectid"].Value);
 
             return map;
         }

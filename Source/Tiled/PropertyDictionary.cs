@@ -14,9 +14,10 @@ namespace Turnable.Tiled
 
         public PropertyDictionary(XElement properties)
         {
-            foreach(XElement property in properties.Descendants())
+            Console.WriteLine(properties);
+            Console.WriteLine(properties.Descendants().Count<XElement>());
+            foreach (XElement property in properties.Descendants())
             {
-                Console.WriteLine(property);
             }
         }
     }

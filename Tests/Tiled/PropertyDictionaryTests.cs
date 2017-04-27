@@ -20,7 +20,8 @@ namespace Tests.Tiled
         [Test]
         public void Constructor_GivenACollectionOfXElements_InitializesAllProperties()
         {
-            var propertiesXElement = new XElement("properties", new XAttribute("name", "enemyTint"), new XAttribute("type", "color"), new XAttribute("value", "#ffa33636"));
+            var propertyXElement = new XElement("property", new XAttribute("name", "enemyTint"), new XAttribute("type", "color"), new XAttribute("value", "#ffa33636"));
+            var propertiesXElement = new XElement("properties", propertyXElement);
 
             var properties = new PropertyDictionary(propertiesXElement);
 
