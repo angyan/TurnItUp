@@ -23,9 +23,9 @@ namespace Tests.Tiled
         {
             var property = new Property("Name", "Value", PropertyType.Color);
 
-            Assert.AreEqual("Name", property.Name);
-            Assert.AreEqual("Value", property.Value);
-            Assert.AreEqual(PropertyType.Color, property.Type);
+            Assert.That(property.Name, Is.EqualTo("Name"));
+            Assert.That(property.Value, Is.EqualTo("Value"));
+            Assert.That(property.Type, Is.EqualTo(PropertyType.Color));
         }
     }
 }

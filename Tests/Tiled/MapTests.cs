@@ -16,15 +16,15 @@ namespace Tests.Tiled
 
             var map = Map.Load(fullPath);
 
-            Assert.IsNotNull(map);
-            Assert.AreEqual("1.0", map.Version);
-            Assert.AreEqual(Orientation.Orthogonal, map.Orientation);
-            Assert.AreEqual(RenderOrder.RightDown, map.RenderOrder);
-            Assert.AreEqual(45, map.Width);
-            Assert.AreEqual(31, map.Height);
-            Assert.AreEqual(16, map.TileWidth);
-            Assert.AreEqual(16, map.TileHeight);
-            Assert.AreEqual(37, map.NextObjectId);
+            Assert.That(map, Is.Not.Null);
+            Assert.That(map.Version, Is.EqualTo("1.0"));
+            Assert.That(map.Orientation, Is.EqualTo(Orientation.Orthogonal));
+            Assert.That(map.RenderOrder, Is.EqualTo(RenderOrder.RightDown));
+            Assert.That(map.Width, Is.EqualTo(45));
+            Assert.That(map.Height, Is.EqualTo(31));
+            Assert.That(map.TileWidth, Is.EqualTo(16));
+            Assert.That(map.TileHeight, Is.EqualTo(16));
+            Assert.That(map.NextObjectId, Is.EqualTo(37));
         }
     }
 }
