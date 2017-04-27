@@ -25,11 +25,11 @@ namespace Turnable.Tiled
             var mapNode = tiledMapDocument.Elements("map").Single();
 
             map.Version = mapNode.Attribute("version").Value;
-            //map.Width = Convert.ToInt32(mapNode.Attributes["width"].Value);
-            //map.Height = Convert.ToInt32(mapNode.Attributes["height"].Value);
-            //map.TileWidth = Convert.ToInt32(mapNode.Attributes["tilewidth"].Value);
-            //map.TileHeight = Convert.ToInt32(mapNode.Attributes["tileheight"].Value);
-            //map.NextObjectId = Convert.ToInt32(mapNode.Attributes["nextobjectid"].Value);
+            map.Width = Convert.ToInt32(mapNode.Attribute("width").Value);
+            map.Height = Convert.ToInt32(mapNode.Attribute("height").Value);
+            map.TileWidth = Convert.ToInt32(mapNode.Attribute("tilewidth").Value);
+            map.TileHeight = Convert.ToInt32(mapNode.Attribute("tileheight").Value);
+            map.NextObjectId = Convert.ToInt32(mapNode.Attribute("nextobjectid").Value);
 
             return map;
         }
