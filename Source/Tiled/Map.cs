@@ -1,39 +1,45 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace Turnable.Tiled
 {
+    [XmlRoot("map")]
     public class Map
     {
+        [XmlAttribute("version")]
         public string Version { get; set; }
         public Orientation Orientation { get; set; }
         public RenderOrder RenderOrder { get; set; }
+        [XmlAttribute("width")]
         public int Width { get; set; }
+        [XmlAttribute("height")]
         public int Height { get; set; }
+        [XmlAttribute("tilewidth")]
         public int TileWidth { get; set; }
+        [XmlAttribute("tileheight")]
         public int TileHeight { get; set; }
+        [XmlAttribute("nextobjectid")]
         public int NextObjectId { get; set; }
-        public PropertyDictionary Properties { get; set; }
+        public PropertyList Properties { get; set; }
 
         public static Map Load(string fullPath)
         {
-            var map = new Map();
-            var tiledMapDocument = XDocument.Load(fullPath);
-
             // REF: http://doc.mapeditor.org/reference/tmx-map-format/#map
-            // Load attributes for map
-            var mapNode = tiledMapDocument.Elements("map").Single();
-            map.Version = mapNode.Attribute("version").Value;
-            map.Width = Convert.ToInt32(mapNode.Attribute("width").Value);
-            map.Height = Convert.ToInt32(mapNode.Attribute("height").Value);
-            map.TileWidth = Convert.ToInt32(mapNode.Attribute("tilewidth").Value);
-            map.TileHeight = Convert.ToInt32(mapNode.Attribute("tileheight").Value);
-            map.NextObjectId = Convert.ToInt32(mapNode.Attribute("nextobjectid").Value);
+            FileStream fileStream = new FileStream(fullPath, FileMode.Open);
+            XmlSerializer serializer = new XmlSerializer(typeof(Map));
 
-            // Load properties for map
-            map.Properties = new PropertyDictionary(mapNode.Descendants("properties").Single());
+            var map = (Map)serializer.Deserialize(fileStream);
+
+            //var map = new Map();
+            //var tiledMapDocument = XDocument.Load(fullPath);
+
+            //// Load properties for map
+            //map.Properties = new PropertyDictionary(mapNode.Elements("properties").Single());
 
             return map;
         }

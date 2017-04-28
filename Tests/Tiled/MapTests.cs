@@ -2,6 +2,7 @@
 using System.IO;
 using NUnit.Framework;
 using Turnable.Tiled;
+using System.Linq;
 
 namespace Tests.Tiled
 {
@@ -26,8 +27,13 @@ namespace Tests.Tiled
             Assert.That(map.TileWidth, Is.EqualTo(16));
             Assert.That(map.TileHeight, Is.EqualTo(16));
             Assert.That(map.NextObjectId, Is.EqualTo(37));
-            // Are the properties for the map correctly set?
+            //// Are the properties for the map correctly set?
             Assert.That(map.Properties, Is.Not.Null);
+            Assert.That(map.Properties.Count, Is.EqualTo(1));
+            Property property = map.Properties[0];
+            Assert.That(property.Name, Is.EqualTo("enemyTint"));
+            Assert.That(property.Value, Is.EqualTo("#ffa33636"));
+            Assert.That(property.Type, Is.EqualTo(PropertyType.Color));
         }
     }
 }

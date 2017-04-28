@@ -41,12 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tiled\PropertyDictionary.cs" />
+    <Compile Include="Tiled\PropertyList.cs" />
     <Compile Include="Tiled\PropertyType.cs" />
     <Compile Include="Tiled\Orientation.cs" />
     <Compile Include="Tiled\Map.cs" />
     <Compile Include="Tiled\Property.cs" />
     <Compile Include="Tiled\RenderOrder.cs" />
+    <Compile Include="Tiled\Tileset.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
