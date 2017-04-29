@@ -25,6 +25,8 @@ namespace Turnable.Tiled
         public int TileHeight { get; set; }
         [XmlAttribute("nextobjectid")]
         public int NextObjectId { get; set; }
+        [XmlArray(ElementName = "properties")]
+        [XmlArrayItem(ElementName = "property")]
         public PropertyList Properties { get; set; }
 
         public static Map Load(string fullPath)

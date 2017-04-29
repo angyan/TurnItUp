@@ -7,31 +7,17 @@ using System.Xml.Serialization;
 
 namespace Turnable.Tiled
 {
+    [XmlType("property")]
     public class Property
     {
-        [XmlAttribute("Name")]
+        [XmlAttribute("name")]
         public string Name { get; set; }
-        [XmlAttribute("Value")]
+        [XmlAttribute("value")]
         public string Value { get; set; }
-        [XmlAttribute("Type")]
+        [XmlAttribute("type")]
         public PropertyType Type { get; set; }
 
         public Property()
-        {
-        }
-
-        public Property(string name, string value)
-        {
-            Name = name;
-            Value = value;
-        }
-
-        public Property(string name, string value, PropertyType type) : this(name, value)
-        {
-            Type = type;
-        }
-
-        public Property(XElement property) : this(property.Attribute("name").Value, property.Attribute("value").Value, (PropertyType)Enum.Parse(typeof(PropertyType), property.Attribute("type").Value, true))
         {
         }
     }
