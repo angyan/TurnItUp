@@ -1,21 +1,22 @@
 ﻿using System;
+using System.IO;
 using NUnit.Framework;
 using Turnable.Tiled;
 using System.Xml.Linq;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Tests.Tiled
 {
     [TestFixture]
-    public class PropertyListTests
+    public class LayerTests
     {
         [Test]
         public void ParameterlessConstructor_Exists()
         {
-            var properties = new PropertyList();
+            var layer = new Layer();
 
-            Assert.That(properties.Count, Is.EqualTo(0));
+            Assert.That(layer.Name, Is.Null);
+            Assert.That(layer.Width, Is.Zero);
+            Assert.That(layer.Height, Is.Zero);
         }
     }
 }

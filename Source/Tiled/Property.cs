@@ -16,9 +16,5 @@ namespace Turnable.Tiled
         public string Value { get; set; }
         [XmlAttribute("type")]
         public PropertyType Type { get; set; }
-
-        public Property()
-        {
-        }
     }
 }

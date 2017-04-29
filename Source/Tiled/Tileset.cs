@@ -3,24 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace Turnable.Tiled
 {
+    [XmlType("tileset")]
     public class Tileset
     {
+        [XmlAttribute("firstgid")]
         public int FirstGlobalTileId { get; set; }
+        [XmlAttribute("name")]
         public string Name { get; set; }
+        [XmlAttribute("tilewidth")]
         public int TileWidth { get; set; }
+        [XmlAttribute("tileheight")]
         public int TileHeight { get; set; }
+        [XmlAttribute("columns")]
         public int Columns { get; set; }
-
-        public Tileset(XElement tileset)
-        {
-            FirstGlobalTileId = Convert.ToInt32(tileset.Attribute("firstgid").Value);
-            Name = tileset.Attribute("name").Value;
-            TileWidth = Convert.ToInt32(tileset.Attribute("tilewidth").Value);
-            TileHeight = Convert.ToInt32(tileset.Attribute("tileheight").Value);
-            Columns = Convert.ToInt32(tileset.Attribute("columns").Value);
-        }
     }
 }
