@@ -30,6 +30,8 @@ namespace Turnable.Tiled
         public List<Property> Properties { get; set; }
         [XmlElement("tileset")]
         public List<Tileset> Tilesets { get; set; }
+        [XmlElement("layer")]
+        public List<Layer> Layers { get; set; }
 
         public static Map Load(string fullPath)
         {
