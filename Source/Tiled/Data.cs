@@ -18,7 +18,8 @@ namespace Turnable.Tiled
             set
             {
                 originalContents = value.Trim();
-                Contents = new Ionic.Zlib.ZlibStream(Contents, Ionic.Zlib.CompressionMode.Decompress, false);
+                byte[] rawContents = Convert.FromBase64String(OriginalContents);
+                Contents = new Ionic.Zlib.ZlibStream(new MemoryStream(rawContents, false), Ionic.Zlib.CompressionMode.Decompress, false);
             }
         }
         public Encoding Encoding { get; set; }

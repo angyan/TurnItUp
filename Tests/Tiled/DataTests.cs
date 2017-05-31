@@ -28,44 +28,9 @@ namespace Tests
             Assert.That(data.Contents, Is.Not.Null);
             using (BinaryReader reader = new BinaryReader(data.Contents))
             {
-                Assert.That(reader.ReadUInt32(), Is.EqualTo((UInt32)0));
+                Assert.That(reader.ReadUInt32(), Is.EqualTo((UInt32)223));
             }
 
         }
     }
 }
-
-
-    //  private XElement _data;
-
-    //    private void Load(string tmxFullFilePath)
-    //    {
-    //        _data = XDocument.Load(tmxFullFilePath).Element("map").Elements("layer").First<XElement>().Element("data");
-    //    }
-
-    //    [Test]
-    //    public void Constructor_GivenAPathToAMinimalBase64GzipCompressedTmxFile_DecodesTheDataInTheFile()
-    //    {
-    //        Load("c:/git/Turnable/Tests/Fixtures/MinimalBase64GzipCompressed.tmx");
-
-    //        Data data = new Data(_data);
-
-    //        using (BinaryReader reader = new BinaryReader(data.Contents))
-    //        {
-    //            Assert.That(reader.ReadUInt32(), Is.EqualTo((UInt32)0));
-    //        }
-    //    }
-
-    //    [Test]
-    //    public void Constructor_GivenAPathToAMinimalBase64ZlibCompressedTmxFile_DecodesTheDataInTheFile()
-    //    {
-    //        Load("c:/git/Turnable/Tests/Fixtures/MinimalBase64ZlibCompressed.tmx");
-
-    //        Data data = new Data(_data);
-
-    //        using (BinaryReader reader = new BinaryReader(data.Contents))
-    //        {
-    //            Assert.That(reader.ReadUInt32(), Is.EqualTo((UInt32)0));
-    //        }
-    //    }
-    //}
