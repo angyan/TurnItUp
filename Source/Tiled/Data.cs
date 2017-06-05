@@ -9,22 +9,15 @@ namespace Turnable.Tiled
 {
     public class Data
     {
-        private string originalContents;
+        private string value;
 
         [XmlText]
-        public string OriginalContents
+        public string Value
         {
-            get { return originalContents; }
-            set
-            {
-                originalContents = value.Trim();
-                byte[] rawContents = Convert.FromBase64String(OriginalContents);
-                Contents = new Ionic.Zlib.ZlibStream(new MemoryStream(rawContents, false), Ionic.Zlib.CompressionMode.Decompress, false);
-            }
+            get { return value; }
+            set { this.value = value.Trim(); }
         }
         public Encoding Encoding { get; set; }
         public Compression Compression { get; set; }
-        [XmlIgnore]
-        public Stream Contents { get; private set; }
     }
 }

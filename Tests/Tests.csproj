@@ -76,6 +76,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Places\LevelTests.cs" />
     <Compile Include="Tiled\DataTests.cs" />
     <Compile Include="Tiled\LayerTests.cs" />
     <Compile Include="Tiled\TilesetTests.cs" />
@@ -99,6 +100,9 @@
       <Project>{bac802b1-0b5e-4ea3-9661-4dc00b7aea5a}</Project>
       <Name>Source</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Utilities\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
