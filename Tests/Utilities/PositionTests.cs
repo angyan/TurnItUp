@@ -122,62 +122,31 @@ namespace Tests.Utilities
             Assert.That(position != null, Is.True);
         }
 
-        //[Test]
-        //public void GetHashCode_IsOverridenToReturnASuitableHashCode()
-        //{
-        //    Position position = new Position(1, 2);
-        //    int calculatedHash;
+        [Test]
+        public void GetHashCode_IsOverridenToReturnASuitableHashCode()
+        {
+            Position position = new Position(1, 2);
+            int calculatedHash;
 
-        //    // REF: http://stackoverflow.com/questions/263400/what-is-the-best-algorithm-for-an-overridden-system-object-gethashcode
-        //    unchecked // Overflow is fine, just wrap
-        //    {
-        //        int hash = (int)2166136261;
-        //        // Suitable nullity checks etc, of course :)
-        //        hash = hash * 16777619 ^ position.X.GetHashCode();
-        //        hash = hash * 16777619 ^ position.Y.GetHashCode();
-        //        calculatedHash = hash;
-        //    }
+            // REF: http://stackoverflow.com/questions/263400/what-is-the-best-algorithm-for-an-overridden-system-object-gethashcode
+            unchecked // Overflow is fine, just wrap
+            {
+                int hash = (int)2166136261;
+                // Suitable nullity checks etc, of course :)
+                hash = hash * 16777619 ^ position.X.GetHashCode();
+                hash = hash * 16777619 ^ position.Y.GetHashCode();
+                calculatedHash = hash;
+            }
 
-        //    Assert.That(position.GetHashCode(), Is.EqualTo(calculatedHash));
-        //}
+            Assert.That(position.GetHashCode(), Is.EqualTo(calculatedHash));
+        }
 
-        //[Test]
-        //public void ToString_DisplaysXAndYCoordinates()
-        //{
-        //    Position position = new Position(4, 5);
+        [Test]
+        public void ToString_DisplaysXAndYCoordinates()
+        {
+            Position position = new Position(4, 5);
 
-        //    Assert.That(position.ToString(), Is.EqualTo("(4, 5)"));
-        //}
-
-        //[Test]
-        //public void NeighboringPosition_GivenADirection_ReturnsTheNeighboringPositionInThatDirection()
-        //{
-        //    Position position = new Position(4, 5);
-
-        //    Position newPosition = position.NeighboringPosition(Direction.North);
-        //    Assert.That(newPosition, Is.Not.EqualTo(position));
-        //    Assert.That(newPosition, Is.EqualTo(new Position(4, 6)));
-        //    newPosition = position.NeighboringPosition(Direction.NorthEast);
-        //    Assert.That(newPosition, Is.Not.EqualTo(position));
-        //    Assert.That(newPosition, Is.EqualTo(new Position(5, 6)));
-        //    newPosition = position.NeighboringPosition(Direction.East);
-        //    Assert.That(newPosition, Is.Not.EqualTo(position));
-        //    Assert.That(newPosition, Is.EqualTo(new Position(5, 5)));
-        //    newPosition = position.NeighboringPosition(Direction.SouthEast);
-        //    Assert.That(newPosition, Is.Not.EqualTo(position));
-        //    Assert.That(newPosition, Is.EqualTo(new Position(5, 4)));
-        //    newPosition = position.NeighboringPosition(Direction.South);
-        //    Assert.That(newPosition, Is.Not.EqualTo(position));
-        //    Assert.That(newPosition, Is.EqualTo(new Position(4, 4)));
-        //    newPosition = position.NeighboringPosition(Direction.SouthWest);
-        //    Assert.That(newPosition, Is.Not.EqualTo(position));
-        //    Assert.That(newPosition, Is.EqualTo(new Position(3, 4)));
-        //    newPosition = position.NeighboringPosition(Direction.West);
-        //    Assert.That(newPosition, Is.Not.EqualTo(position));
-        //    Assert.That(newPosition, Is.EqualTo(new Position(3, 5)));
-        //    newPosition = position.NeighboringPosition(Direction.North);
-        //    Assert.That(newPosition, Is.Not.EqualTo(position));
-        //    Assert.That(newPosition, Is.EqualTo(new Position(4, 6)));
-        //}
+            Assert.That(position.ToString(), Is.EqualTo("(4, 5)"));
+        }
     }
 }

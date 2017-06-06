@@ -10,10 +10,9 @@ namespace Tests.Tiled
     public class MapTests
     {
         [Test]
-        public void Constructor_GivenAFullPathToATmxFile_LoadsTheTiledMap()
+        public void Load_GivenAFullPathToATmxFile_LoadsTheTiledMap()
         {
             var fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Fixtures\orthogonal-outside.tmx");
-            Console.WriteLine(fullPath);
 
             var map = Map.Load(fullPath);
 
