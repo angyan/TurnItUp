@@ -84,6 +84,7 @@
     <Compile Include="Tiled\MapTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\PositionTests.cs" />
+    <Compile Include="Utilities\TileMapLayerTests.cs" />
     <Compile Include="Utilities\TileMapTests.cs" />
     <Compile Include="Utilities\NamedElementCollectionTests.cs" />
   </ItemGroup>

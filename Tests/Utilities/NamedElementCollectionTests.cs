@@ -8,12 +8,15 @@ namespace Tests.Utilities
     public class NamedElementCollectionTests
     {
         [Test]
-        public void Add_AddsElementThatCanBeReferencedByIndexOrName()
+        public void Add_GivenAnObjectThatImplementsINamedElement_AddsObjectThatCanThenBeReferencedByIndexOrName()
         {
-            //_elementList.Add(layer);
+            TileMapLayer tileMapLayer = new TileMapLayer("Name");
+            var namedElementCollection = new NamedElementCollection<TileMapLayer>();
 
-            //Assert.That(_elementList[0], Is.SameAs(layer));
-            //Assert.That(_elementList[layer.Name], Is.SameAs(layer));
+            namedElementCollection.Add(tileMapLayer);
+
+            Assert.That(namedElementCollection[0], Is.SameAs(tileMapLayer));
+            Assert.That(namedElementCollection[tileMapLayer.Name], Is.SameAs(tileMapLayer));
         }
 
         [Test]

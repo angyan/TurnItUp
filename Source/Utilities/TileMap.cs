@@ -9,10 +9,12 @@ namespace Turnable.Utilities
     public class TileMap
     {
         public Map Map { get; set; }
+        public NamedElementCollection<TileMapLayer> TileMapLayers { get; }
 
         public TileMap(string fullPath)
         {
             Map = Map.Load(fullPath);
+            TileMapLayers = new NamedElementCollection<TileMapLayer>();
         }
     }
 }

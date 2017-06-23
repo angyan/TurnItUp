@@ -56,8 +56,11 @@
     <Compile Include="Tiled\Property.cs" />
     <Compile Include="Tiled\RenderOrder.cs" />
     <Compile Include="Tiled\Tileset.cs" />
+    <Compile Include="Utilities\INamedElement.cs" />
+    <Compile Include="Utilities\NamedElementCollection.cs" />
     <Compile Include="Utilities\Position.cs" />
     <Compile Include="Utilities\TileMap.cs" />
+    <Compile Include="Utilities\TileMapLayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dependencies\Ionic.Zlib.dll" />

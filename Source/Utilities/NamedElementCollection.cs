@@ -1,9 +1,13 @@
-﻿namespace Tests.Utilities
+﻿using System;
+using System.Collections.ObjectModel;
+
+namespace Turnable.Utilities
 {
-    internal class NamedElementCollection
+    public class NamedElementCollection<T> : KeyedCollection<string, T> where T : INamedElement
     {
-        public NamedElementCollection()
+        protected override string GetKeyForItem(T item)
         {
+            return item.Name;
         }
     }
 }
