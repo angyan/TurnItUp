@@ -39,6 +39,26 @@ namespace Turnable.Utilities
                     dataStream = new ZlibStream(dataStream, CompressionMode.Decompress, false);
                     break;
             }
+
+            // Read from the decoded and uncompressed stream
+            uint tileGlobalId = 0;
+
+            using (BinaryReader reader = new BinaryReader(dataStream))
+            {
+                for (int row = 0; row < height; row++)
+                {
+                    for (int col = 0; col < width; col++)
+                    {
+                        tileGlobalId = reader.ReadUInt32();
+
+                        // The .tmx format uses 0 to indicate a tile that hasn't been set
+                        if (tileGlobalId != 0)
+                        {
+                            Tiles[new Position(col, row)] = tileGlobalId;
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -8,9 +8,9 @@ namespace Tests.Utilities
     public class NamedElementCollectionTests
     {
         [Test]
-        public void Add_GivenAnObjectThatImplementsINamedElement_AddsObjectThatCanThenBeReferencedByIndexOrName()
+        public void Add_GivenANamedElement_AddsTheNamedElementThatCanThenBeReferencedByIndexOrName()
         {
-            TileMapLayer tileMapLayer = new TileMapLayer("Name");
+            var tileMapLayer = new TileMapLayer("Name", 5, 10);
             var namedElementCollection = new NamedElementCollection<TileMapLayer>();
 
             namedElementCollection.Add(tileMapLayer);
@@ -20,30 +20,32 @@ namespace Tests.Utilities
         }
 
         [Test]
-        public void Add_WhenMultipleElementsAreAdded_KeepsTheOrderInWhichTheElementsAreAdded()
+        public void Add_CalledMultipleTimesWithDifferentNamedElements_KeepsTheOrderInWhichTheNamedElementsAreAdded()
         {
-            //Layer[] layers = new Layer[3];
+            var tileMapLayers = new TileMapLayer[3];
+            var namedElementCollection = new NamedElementCollection<TileMapLayer>();
 
-            //for (int i = 0; i < 3; i++)
-            //{
-            //    layers[i] = TiledFactory.BuildLayer();
-            //    layers[i].Name = String.Format("Layer {0}", i);
-            //    _elementList.Add(layers[i]);
-            //}
+            for (int index = 0; index < 3; index++)
+            {
+                tileMapLayers[index] = new TileMapLayer(String.Format("Layer {0}", index), 5, 10);
 
-            //for (int i = 0; i < 3; i++)
-            //{
-            //    Assert.That(_elementList[i], Is.SameAs(layers[i]));
-            //}
+                namedElementCollection.Add(tileMapLayers[index]);
+            }
+
+            for (int index = 0; index < 3; index++)
+            {
+                Assert.That(namedElementCollection[index], Is.SameAs(tileMapLayers[index]));
+            }
         }
 
         [Test]
-        public void Add_WhenAnElementWithTheSameNameAlreadyExists_ThrowsAnException()
+        public void Add_WhenAddingANamedElementWhenANamedElementWithTheSameNameAlreadyExists_ThrowsAnException()
         {
-            //Layer layer = TiledFactory.BuildLayer();
+            var tileMapLayer = new TileMapLayer("Name", 5, 10);
+            var namedElementCollection = new NamedElementCollection<TileMapLayer>();
 
-            //_elementList.Add(layer);
-            //Assert.That(() => _elementList.Add(layer), Throws.ArgumentException);
+            namedElementCollection.Add(tileMapLayer);
+            Assert.That(() => namedElementCollection.Add(tileMapLayer), Throws.ArgumentException);
         }
     }
 }

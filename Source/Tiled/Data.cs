@@ -19,5 +19,14 @@ namespace Turnable.Tiled
         }
         public Encoding Encoding { get; set; }
         public Compression Compression { get; set; }
+
+        public Data()
+        {
+        }
+
+        public Data(string value) : this()
+        {
+            Value = value;
+        }
     }
 }

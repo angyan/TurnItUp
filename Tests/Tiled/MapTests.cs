@@ -3,12 +3,14 @@ using System.IO;
 using NUnit.Framework;
 using Turnable.Tiled;
 using System.Linq;
+using NCrunch.Framework;
 
 namespace Tests.Tiled
 {
     [TestFixture]
     public class MapTests
     {
+        [ExclusivelyUses("LocksFiles")]
         [Test]
         public void Load_GivenAFullPathToATmxFile_LoadsTheTiledMap()
         {
