@@ -20,7 +20,11 @@ namespace Tests.Tiled
 
             // Was the Tiled map loaded?
             Assert.That(tileMap.Map, Is.Not.Null);
-            //Assert.That(tileMap.TileMapLayers.Count, Is.EqualTo(tileMap.Map.Layers.Count));
+            Assert.That(tileMap.TileMapLayers.Count, Is.EqualTo(tileMap.Map.Layers.Count));
+            foreach(TileMapLayer tileMapLayer in tileMap.TileMapLayers)
+            {
+                Assert.That(tileMapLayer.Tiles.Count, Is.Not.Zero);
+            }
         }
     }
 }
