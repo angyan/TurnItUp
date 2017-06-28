@@ -4,12 +4,21 @@ using NUnit.Framework;
 using Turnable.Tiled;
 using System.Xml.Linq;
 using Turnable.Utilities;
+using System.Linq;
 
 namespace Tests.Tiled
 {
     [TestFixture]
     public class TileMapLayerTests
     {
+        private TileMapLayer tileMapLayer;
+
+        [SetUp]
+        public void SetUp()
+        {
+            tileMapLayer = new TileMapLayer("Name", 5, 10);
+        }
+
         [Test]
         public void Constructor_GivenANameWidthAndHeight_InitializesAnEmptyTileMapLayer()
         {
@@ -33,6 +42,171 @@ namespace Tests.Tiled
             Assert.That(tileMapLayer.Name, Is.EqualTo("Name"));
             Assert.That(tileMapLayer.Tiles, Is.Not.Null);
             Assert.That(tileMapLayer.Tiles.Count, Is.Not.Zero);
+            Assert.That(tileMapLayer.Tiles[tileMapLayer.Tiles.Keys.First()], Is.EqualTo(223));
         }
+
+        // ************************
+        // Tiles Manipulation Tests
+        // ************************
+        [Test]
+        public void GetTile_GivenAPositionWithNoTile_ReturnsNull()
+        {
+            Assert.That(tileMapLayer.GetTile(new Position(7, 2)), Is.Null);
+        }
+
+        [Test]
+        public void GetTile_GivenAPositionWithATile_ReturnsTheTile()
+        {
+            Position position = new Position(7, 2);
+            tileMapLayer.SetTile(position, 2107);
+
+            Assert.That(TileMapLayer.GetTile(position), Is.EqualTo(2107));
+        }
+
+        //[Test]
+        //public void MoveTile_MovesATileToAnEmptyPositionInTheSameLayer()
+        //{
+        //    Layer layer = new Layer(TiledFactory.BuildLayerXElementWithProperties());
+
+        //    int tileCount = layer.Tiles.Count;
+        //    uint tileGlobalId = layer.Tiles[new Position(6, 1)].GlobalId;
+
+        //    layer.MoveTile(new Position(6, 1), new Position(6, 2));
+
+        //    Assert.That(layer.IsTileAt(new Position(6, 1)), Is.False);
+        //    Assert.That(layer.IsTileAt(new Position(6, 2)), Is.True);
+
+        //    // Make sure that the tileCount does not change
+        //    Assert.That(layer.Tiles.Count, Is.EqualTo(tileCount));
+
+        //    // Make sure that the tile data is changed as well
+        //    Tile tile = layer.Tiles[new Position(6, 2)];
+        //    Assert.That(tile.GlobalId, Is.EqualTo((uint)2107));
+        //    Assert.That(tile.X, Is.EqualTo(6));
+        //    Assert.That(tile.Y, Is.EqualTo(2));
+        //}
+
+        //[Test]
+        //public void MoveTile_WhenNoTileExistsAtThePositionInTheLayer_ThrowsAnException()
+        //{
+        //    Layer layer = new Layer(TiledFactory.BuildLayerXElementWithProperties());
+
+        //    Assert.That(() => layer.MoveTile(new Position(7, 2), new Position(7, 3)), Throws.InvalidOperationException);
+        //}
+
+        //[Test]
+        //public void MoveTile_WhenDestinationIsOccupied_ThrowsAnException()
+        //{
+        //    Layer layer = new Layer(TiledFactory.BuildLayerXElementWithProperties());
+
+        //    Assert.That(() => layer.MoveTile(new Position(6, 1), new Position(5, 13)), Throws.InvalidOperationException);
+        //}
+
+        //[Test]
+        //public void SwapTile_SwapsTwoTilesInTheSameLayer()
+        //{
+        //    Layer layer = new Layer(TiledFactory.BuildLayerXElementWithProperties());
+
+        //    int tileCount = layer.Tiles.Count;
+        //    uint tile1GlobalId = layer.Tiles[new Position(6, 1)].GlobalId;
+        //    uint tile2GlobalId = layer.Tiles[new Position(5, 13)].GlobalId;
+
+        //    layer.SwapTile(new Position(6, 1), new Position(5, 13));
+
+        //    Assert.That(layer.IsTileAt(new Position(6, 1)), Is.True);
+        //    Assert.That(layer.IsTileAt(new Position(5, 13)), Is.True);
+
+        //    // Make sure that the tileCount does not change
+        //    Assert.That(layer.Tiles.Count, Is.EqualTo(tileCount));
+
+        //    // Make sure that the tile data is changed as well
+        //    Tile tile = layer.Tiles[new Position(5, 13)];
+        //    Assert.That(tile.X, Is.EqualTo(5));
+        //    Assert.That(tile.Y, Is.EqualTo(13));
+        //    Assert.That(tile.GlobalId, Is.EqualTo(tile1GlobalId));
+        //    tile = layer.Tiles[new Position(6, 1)];
+        //    Assert.That(tile.X, Is.EqualTo(6));
+        //    Assert.That(tile.Y, Is.EqualTo(1));
+        //    Assert.That(tile.GlobalId, Is.EqualTo(tile2GlobalId));
+        //}
+
+        //[Test]
+        //public void SwapTile_WhenNoTileExistsInTheFirstPosition_ThrowsAnException()
+        //{
+        //    Layer layer = new Layer(TiledFactory.BuildLayerXElementWithProperties());
+
+        //    Assert.That(() => layer.SwapTile(new Position(7, 2), new Position(5, 13)), Throws.InvalidOperationException);
+        //}
+
+        //[Test]
+        //public void SwapTile_WhenNoTileExistsInTheSecondPosition_ThrowsAnException()
+        //{
+        //    Layer layer = new Layer(TiledFactory.BuildLayerXElementWithProperties());
+
+        //    Assert.That(() => layer.SwapTile(new Position(6, 1), new Position(7, 2)), Throws.InvalidOperationException);
+        //}
+
+        [Test]
+        public void SetTile_GivenAPositionWithNoTile_SetsTileAtThatPosition()
+        {
+            Position position = new Position(7, 2);
+            tileMapLayer.SetTile(position, 200);
+
+            Assert.That(tileMapLayer.Tiles[position], Is.EqualTo(200));
+        }
+
+        [Test]
+        public void SetTile_GivenAPositionWithATile_SetsANewTileAtThatPosition()
+        {
+            Position position = new Position(7, 2);
+            tileMapLayer.SetTile(position, 200);
+            tileMapLayer.SetTile(position, 201);
+
+            Assert.That(tileMapLayer.Tiles[position], Is.EqualTo(201));
+        }
+
+        //// TODO: Setting a tile outside the bounds of the Layer is illegal, write unit test for this
+
+        //[Test]
+        //public void RemoveTile_GivenAPosition_RemovesTheTileThatExistsAtThatPosition()
+        //{
+        //    Layer layer = new Layer(TiledFactory.BuildLayerXElementWithProperties());
+
+        //    layer.SetTile(new Position(7, 2), 2107);
+        //    int tileCount = layer.Tiles.Count;
+        //    layer.RemoveTile(new Position(7, 2));
+
+        //    Assert.That(layer.IsTileAt(new Position(7, 2)), Is.False);
+        //    Assert.That(layer.Tiles.Count, Is.EqualTo(tileCount - 1));
+        //}
+
+        //[Test]
+        //public void RemoveTile_GivenAPositionThatHasNoTileToRemove_DoesNotThrowAnException()
+        //{
+        //    Layer layer = new Layer(TiledFactory.BuildLayerXElementWithProperties());
+
+        //    layer.RemoveTile(new Position(7, 2));
+        //    Assert.That(() => layer.RemoveTile(new Position(7, 2)), Throws.Nothing);
+        //}
+
+        //[Test]
+        //public void Fill_GivenAGlobalId_FillsTheEntireLayerWithTiles()
+        //{
+        //    Layer layer = new Layer(TiledFactory.BuildLayerXElementWithProperties());
+
+        //    layer.Fill(1);
+
+        //    for (int col = 0; col < layer.Width; col++)
+        //    {
+        //        for (int row = 0; row < layer.Height; row++)
+        //        {
+        //            Tile tile = layer.Tiles[new Position(col, row)];
+        //            Assert.That(tile.GlobalId, Is.EqualTo((uint)1));
+        //            Assert.That(tile.X, Is.EqualTo(col));
+        //            Assert.That(tile.Y, Is.EqualTo(row));
+        //        }
+        //    }
+        //}
+
     }
 }

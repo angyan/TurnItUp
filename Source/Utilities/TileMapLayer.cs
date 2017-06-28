@@ -60,5 +60,15 @@ namespace Turnable.Utilities
                 }
             }
         }
+
+        public uint GetTile(Position position)
+        {
+            return Tiles[position];
+        }
+
+        public void SetTile(Position position, uint tileGlobalId)
+        {
+            Tiles[position] = tileGlobalId;
+        }
     }
 }
