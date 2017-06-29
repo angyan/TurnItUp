@@ -61,14 +61,32 @@ namespace Turnable.Utilities
             }
         }
 
-        public uint GetTile(Position position)
+        public uint? GetTile(Position position)
         {
+            if (!Tiles.ContainsKey(position))
+            {
+                return null;
+            }
+
             return Tiles[position];
         }
 
         public void SetTile(Position position, uint tileGlobalId)
         {
             Tiles[position] = tileGlobalId;
+        }
+
+        public void SwapTile(Position position1, Position position2)
+        {
+            // Swapping two tiles requires tiles to be present at both positions.
+            if (!Tiles.ContainsKey(position1) || !Tiles.ContainsKey(position2))
+            {
+                throw new InvalidOperationException();
+            }
+
+            uint tile = Tiles[position1];
+            Tiles[position1] = Tiles[position2];
+            Tiles[position2] = tile;
         }
     }
 }
