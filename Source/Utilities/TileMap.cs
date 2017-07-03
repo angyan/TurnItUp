@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Turnable.Tiled;
+﻿using Turnable.Tiled;
 
 namespace Turnable.Utilities
 {
@@ -13,8 +9,13 @@ namespace Turnable.Utilities
 
         public TileMap(string fullPath)
         {
-            Map = Map.Load(fullPath);
             TileMapLayers = new NamedElementCollection<TileMapLayer>();
+            Map = Map.Load(fullPath);
+
+            foreach(Layer layer in Map.Layers)
+            {
+                TileMapLayers.Add(new TileMapLayer(layer.Name, layer.Width, layer.Height, layer.Data));
+            }
         }
     }
 }

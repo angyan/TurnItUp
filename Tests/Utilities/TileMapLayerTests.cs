@@ -1,8 +1,5 @@
-﻿using System;
-using System.IO;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Turnable.Tiled;
-using System.Xml.Linq;
 using Turnable.Utilities;
 using System.Linq;
 
@@ -93,6 +90,7 @@ namespace Tests.Tiled
         {
             Position startingPosition = new Position(1, 2);
             Position destination = new Position(3, 4);
+            tileMapLayer.SetTile(startingPosition, 21);
             tileMapLayer.SetTile(destination, 20);
 
             Assert.That(() => tileMapLayer.MoveTile(startingPosition, destination), Throws.InvalidOperationException);

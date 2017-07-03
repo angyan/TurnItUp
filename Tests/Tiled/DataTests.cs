@@ -1,6 +1,4 @@
 ﻿using NUnit.Framework;
-using System;
-using System.IO;
 using Turnable.Tiled;
 
 namespace Tests.Tiled

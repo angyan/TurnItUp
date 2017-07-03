@@ -1,10 +1,7 @@
 ﻿using System;
 using System.IO;
 using NUnit.Framework;
-using Turnable.Tiled;
-using System.Xml.Linq;
 using Turnable.Utilities;
-using NCrunch.Framework;
 
 namespace Tests.Tiled
 {
