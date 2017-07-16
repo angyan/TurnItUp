@@ -65,7 +65,7 @@ namespace Tests.Locations
         [Test]
         public void Constructor_GivenATileMapTileMapLocationAndSize_InitializesTheViewport()
         {
-            var tileMapLocation = new Position(54, 53)
+            var tileMapLocation = new Position(54, 53);
             var viewport = new Viewport(tileMap, 16, 15, tileMapLocation);
 
             Assert.That(viewport.TileMap, Is.EqualTo(tileMap));

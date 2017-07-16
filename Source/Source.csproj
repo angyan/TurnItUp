@@ -56,17 +56,23 @@
     <Compile Include="Tiled\Property.cs" />
     <Compile Include="Tiled\RenderOrder.cs" />
     <Compile Include="Tiled\Tileset.cs" />
+    <Compile Include="Utilities\IBounded.cs" />
     <Compile Include="Utilities\INamedElement.cs" />
     <Compile Include="Utilities\NamedElementCollection.cs" />
+    <Compile Include="Utilities\Rectangle.cs" />
     <Compile Include="Utilities\Position.cs" />
     <Compile Include="Utilities\TileMap.cs" />
     <Compile Include="Utilities\TileMapLayer.cs" />
+    <Compile Include="Utilities\Viewport.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dependencies\Ionic.Zlib.dll" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /y $(ProjectDir)$(OutDir) "c:/git/Roguelike/Assets/Plugins"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

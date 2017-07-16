@@ -76,6 +76,18 @@ namespace Turnable.Utilities
             Tiles[position] = tileGlobalId;
         }
 
+        public void MoveTile(Position start, Position destination)
+        {
+            // Moving a tile requires the destination to be empty.
+            if (Tiles.ContainsKey(destination))
+            {
+                throw new InvalidOperationException();
+            }
+
+            SetTile(destination, (uint)GetTile(start));
+            RemoveTile(start);
+        }
+
         public void SwapTile(Position position1, Position position2)
         {
             // Swapping two tiles requires tiles to be present at both positions.
@@ -87,6 +99,11 @@ namespace Turnable.Utilities
             uint tile = Tiles[position1];
             Tiles[position1] = Tiles[position2];
             Tiles[position2] = tile;
+        }
+
+        public void RemoveTile(Position position)
+        {
+            Tiles.Remove(position);
         }
     }
 }

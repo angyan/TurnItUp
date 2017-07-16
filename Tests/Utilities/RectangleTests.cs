@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using Turnable.Utilities;
+using System.Collections.Generic;
 
 namespace Tests.Utilities
 {
@@ -84,6 +85,41 @@ namespace Tests.Utilities
             Assert.That(rectangle.Contains(new Position(6, 1)), Is.False);
             Assert.That(rectangle.Contains(new Position(1, 5)), Is.False);
             Assert.That(rectangle.Contains(new Position(5, 6)), Is.False);
+        }
+
+        [Test]
+        public void RectangleImplementsAnIterator_ThatReturnsAllPositionsContainedInTheRectangle()
+        {
+            Rectangle rectangle = new Rectangle(new Position(1, 1), 2, 3);
+            var iteratedPositions = new List<Position>();
+
+            foreach(Position position in rectangle)
+            {
+                iteratedPositions.Add(position);
+            }
+
+            Assert.That(iteratedPositions.Count, Is.EqualTo(6));
+            // Check that the positions returned were iterated from left to right and bottom to top of the rectangle.
+            Assert.That(iteratedPositions[0], Is.EqualTo(new Position(1, 1)));
+            Assert.That(iteratedPositions[1], Is.EqualTo(new Position(2, 1)));
+            Assert.That(iteratedPositions[2], Is.EqualTo(new Position(1, 2)));
+            Assert.That(iteratedPositions[3], Is.EqualTo(new Position(2, 2)));
+            Assert.That(iteratedPositions[4], Is.EqualTo(new Position(1, 3)));
+            Assert.That(iteratedPositions[5], Is.EqualTo(new Position(2, 3)));
+        }
+
+        [Test]
+        public void Move_GivenANewLocationForTheBottomLeftCorner_MovesTheRectanglesBottomLeftCorner()
+        {
+            Position newLocation = new Position(3, 3);
+            Rectangle rectangle = new Rectangle(new Position(1, 1), 2, 3);
+
+            rectangle.Move(newLocation);
+ 
+            Assert.That(rectangle.BottomLeft, Is.EqualTo(newLocation));
+            Assert.That(rectangle.TopRight, Is.EqualTo(new Position(newLocation.X + 2 - 1, newLocation.Y + 3 - 1)));
+            Assert.That(rectangle.Width, Is.EqualTo(2));
+            Assert.That(rectangle.Height, Is.EqualTo(3));
         }
     }
 }
