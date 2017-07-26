@@ -13,7 +13,7 @@ namespace Tests.Locations
         [SetUp]
         public void SetUp()
         {
-            var fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Fixtures\orthogonal-outside.tmx");
+            var fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Fixtures\orthogonal-outside.tmx");
             tileMap = new TileMap(fullPath);
         }
 
@@ -44,8 +44,8 @@ namespace Tests.Locations
             Assert.That(viewport.TileMap, Is.EqualTo(tileMap));
             Assert.That(viewport.Bounds, Is.Not.Null);
             Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(0, 0)));
-            Assert.That(viewport.Bounds.Width, Is.EqualTo(tileMap.TileMapLayers[0].Width));
-            Assert.That(viewport.Bounds.Height, Is.EqualTo(tileMap.TileMapLayers[0].Height));
+            Assert.That(viewport.Bounds.Width, Is.EqualTo(tileMap.Layers[0].Width));
+            Assert.That(viewport.Bounds.Height, Is.EqualTo(tileMap.Layers[0].Height));
             Assert.That(viewport.TileMapLocation, Is.EqualTo(viewport.Bounds.BottomLeft));
         }
 

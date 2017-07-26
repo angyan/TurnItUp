@@ -11,7 +11,7 @@ namespace Tests.Tiled
         [Test]
         public void Load_GivenAFullPathToATmxFile_LoadsTheTiledMap()
         {
-            var fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Fixtures\orthogonal-outside.tmx");
+            var fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Fixtures\orthogonal-outside.tmx");
 
             var map = Map.Load(fullPath);
 
