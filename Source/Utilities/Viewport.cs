@@ -1,4 +1,5 @@
 ﻿using System;
+using Turnable.Places;
 using Turnable.Utilities;
 
 namespace Tests.Locations
@@ -6,8 +7,8 @@ namespace Tests.Locations
     public class Viewport : IBounded
     {
         public Rectangle Bounds { get; set; }
-        public TileMap TileMap { get; set; }
-        public Position TileMapLocation { get; private set; }
+        public Level Level { get; set; }
+        public Position Location { get; private set; }
 
         public Viewport()
         {
@@ -18,19 +19,19 @@ namespace Tests.Locations
             Bounds = new Rectangle(new Position(0, 0), width, height);
         }
 
-        public Viewport(TileMap tileMap, int width, int height) : this(width, height)
+        public Viewport(Level level, int width, int height) : this(width, height)
         {
-            TileMap = tileMap;
+            Level = level;
             TileMapLocation = Bounds.BottomLeft;
         }
 
-        public Viewport(TileMap tileMap) : this(tileMap, tileMap.Map.Width, tileMap.Map.Height)
+        public Viewport(Level level) : this(level, level.TileMap.Map.Width, level.TileMap.Map.Height)
         {
         }
 
-        public Viewport(TileMap tileMap, int width, int height, Position tileMapLocation) : this(tileMap, width, height)
+        public Viewport(Level level, int width, int height, Position location) : this(level, width, height)
         {
-            Bounds.Move(tileMapLocation);
+            Bounds.Move(location);
             TileMapLocation = Bounds.BottomLeft;
         }
     }
