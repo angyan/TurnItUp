@@ -109,15 +109,15 @@ namespace Tests.Utilities
         }
 
         [Test]
-        public void Move_GivenANewLocationForTheBottomLeftCorner_MovesTheRectanglesBottomLeftCorner()
+        public void Move_GivenANewPositionForTheBottomLeftCorner_MovesTheRectanglesBottomLeftCorner()
         {
-            Position newLocation = new Position(3, 3);
+            Position newPosition = new Position(3, 3);
             Rectangle rectangle = new Rectangle(new Position(1, 1), 2, 3);
 
-            rectangle.Move(newLocation);
+            rectangle.Move(newPosition);
  
-            Assert.That(rectangle.BottomLeft, Is.EqualTo(newLocation));
-            Assert.That(rectangle.TopRight, Is.EqualTo(new Position(newLocation.X + 2 - 1, newLocation.Y + 3 - 1)));
+            Assert.That(rectangle.BottomLeft, Is.EqualTo(newPosition));
+            Assert.That(rectangle.TopRight, Is.EqualTo(new Position(newPosition.X + 2 - 1, newPosition.Y + 3 - 1)));
             Assert.That(rectangle.Width, Is.EqualTo(2));
             Assert.That(rectangle.Height, Is.EqualTo(3));
         }

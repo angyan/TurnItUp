@@ -10,8 +10,15 @@ namespace Tests.Tiled
     {
         private TileMap tileMap;
 
+        [SetUp]
+        public void SetUp()
+        {
+            var fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Fixtures\orthogonal-outside.tmx");
+            tileMap = new TileMap(fullPath);
+        }
+
         [Test]
-        public void Constructor_GivenAFullPathToATmxFile_LoadsATiledMapAndTheTilesPerLayer()
+        public void Constructor_GivenAFullPathToATmxFile_InitializesTheTileMap()
         {
             var fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Fixtures\orthogonal-outside.tmx");
 
@@ -24,17 +31,22 @@ namespace Tests.Tiled
             {
                 Assert.That(tileMapLayer.Tiles.Count, Is.Not.Zero);
             }
+            // Was the bounds of the TileMap correctly set?
+            Assert.That(tileMap.Bounds.BottomLeft, Is.EqualTo(new Position(0, 0)));
+            Assert.That(tileMap.Bounds.Width, Is.EqualTo(tileMap.Layers[0].Width));
+            Assert.That(tileMap.Bounds.Height, Is.EqualTo(tileMap.Layers[0].Height));
+        }
+
+        [Test]
+        public void TileMap_ImplementsTheIBoundedInterface()
+        {
+            Assert.That(tileMap, Is.InstanceOf<IBounded>());
         }
 
         [Test]
         public void GetTile_GivenXYAndLayerIndex_ReturnsATile()
         {
-            var fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Fixtures\orthogonal-outside.tmx");
-            tileMap = new TileMap(fullPath);
-
             Assert.That(tileMap.GetTile(0, 0, 0), Is.EqualTo(223));
-
         }
-
     }
 }

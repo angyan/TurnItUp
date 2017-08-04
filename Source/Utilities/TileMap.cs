@@ -1,11 +1,13 @@
-﻿using Turnable.Tiled;
+﻿using System;
+using Turnable.Tiled;
 
 namespace Turnable.Utilities
 {
-    public class TileMap
+    public class TileMap : IBounded
     {
         public Map Map { get; set; }
         public NamedElementCollection<TileMapLayer> Layers { get; }
+        public Rectangle Bounds { get; set; }
 
         public TileMap(string fullPath)
         {

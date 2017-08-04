@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using Turnable.Places;
+using Turnable.Utilities;
 
 namespace Tests.Places
 {
@@ -22,6 +23,11 @@ namespace Tests.Places
             {
                 Assert.That(tileMapLayer.Tiles.Count, Is.Not.Zero);
             }
+            // Was a default viewport initialized?
+            Assert.That(level.Viewport, Is.Not.Null);
+            Assert.That(level.Viewport.Bounds.Width, Is.EqualTo(16));
+            Assert.That(level.Viewport.Bounds.Height, Is.EqualTo(16));
+            Assert.That(level.Viewport.Position, Is.EqualTo(new Position(0, 0)));
         }
     }
 }

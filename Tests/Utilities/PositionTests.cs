@@ -148,5 +148,20 @@ namespace Tests.Utilities
 
             Assert.That(position.ToString(), Is.EqualTo("(4, 5)"));
         }
+
+        [Test]
+        public void NeighboringPosition_GivenADirection_ReturnsTheNearestNeighboringPositionInThatDirection()
+        {
+            Position position = new Position(4, 5);
+
+            Assert.That(position.NeighboringPosition(Direction.North), Is.EqualTo(new Position(4, 4)));
+            Assert.That(position.NeighboringPosition(Direction.NorthEast), Is.EqualTo(new Position(5, 4)));
+            Assert.That(position.NeighboringPosition(Direction.East), Is.EqualTo(new Position(5, 5)));
+            Assert.That(position.NeighboringPosition(Direction.SouthEast), Is.EqualTo(new Position(5, 6)));
+            Assert.That(position.NeighboringPosition(Direction.South), Is.EqualTo(new Position(4, 6)));
+            Assert.That(position.NeighboringPosition(Direction.SouthWest), Is.EqualTo(new Position(3, 6)));
+            Assert.That(position.NeighboringPosition(Direction.West), Is.EqualTo(new Position(3, 5)));
+            Assert.That(position.NeighboringPosition(Direction.NorthWest), Is.EqualTo(new Position(3, 4)));
+        }
     }
 }

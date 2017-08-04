@@ -2,13 +2,12 @@
 using Turnable.Places;
 using Turnable.Utilities;
 
-namespace Tests.Locations
+namespace Tests.Places
 {
     public class Viewport : IBounded
     {
         public Rectangle Bounds { get; set; }
-        public Level Level { get; set; }
-        public Position Location { get; private set; }
+        public Position Position { get; private set; }
 
         public Viewport()
         {
@@ -17,22 +16,21 @@ namespace Tests.Locations
         public Viewport(int width, int height) : this()
         {
             Bounds = new Rectangle(new Position(0, 0), width, height);
+            Position = Bounds.BottomLeft;
         }
 
-        public Viewport(Level level, int width, int height) : this(width, height)
+        public Viewport(int width, int height, Position position) : this(width, height)
         {
-            Level = level;
-            TileMapLocation = Bounds.BottomLeft;
+            Bounds.Move(position);
+            Position = Bounds.BottomLeft;
         }
 
-        public Viewport(Level level) : this(level, level.TileMap.Map.Width, level.TileMap.Map.Height)
+        public void Focus(Position position)
         {
-        }
+            Position newPosition = new Position(position.X - Bounds.Width / 2, position.Y - Bounds.Height / 2);
 
-        public Viewport(Level level, int width, int height, Position location) : this(level, width, height)
-        {
-            Bounds.Move(location);
-            TileMapLocation = Bounds.BottomLeft;
+            Bounds.Move(newPosition);
+            Position = Bounds.BottomLeft;
         }
     }
 }

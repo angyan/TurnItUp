@@ -46,9 +46,9 @@ namespace Turnable.Utilities
             }
         }
 
-        public void Move(Position newLocation)
+        public void Move(Position newPosition)
         {
-            BottomLeft = newLocation;
+            BottomLeft = newPosition;
         }
     }
 }

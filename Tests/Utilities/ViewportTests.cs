@@ -2,19 +2,20 @@
 using NUnit.Framework;
 using Turnable.Utilities;
 using System.IO;
+using Turnable.Places;
 
-namespace Tests.Locations
+namespace Tests.Places
 {
     [TestFixture]
     public class ViewportTests
     {
-        private TileMap tileMap;
+        private Level level;
 
         [SetUp]
         public void SetUp()
         {
             var fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Fixtures\orthogonal-outside.tmx");
-            tileMap = new TileMap(fullPath);
+            level = new Level(fullPath);
         }
 
         [Test]
@@ -34,46 +35,21 @@ namespace Tests.Locations
             Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(0, 0)));
             Assert.That(viewport.Bounds.Width, Is.EqualTo(16));
             Assert.That(viewport.Bounds.Height, Is.EqualTo(15));
+            Assert.That(viewport.Position, Is.EqualTo(viewport.Bounds.BottomLeft));
         }
 
-        [Test]
-        public void Constructor_GivenATileMap_IntializesTheViewport()
-        {
-            var viewport = new Viewport(tileMap);
-
-            Assert.That(viewport.TileMap, Is.EqualTo(tileMap));
-            Assert.That(viewport.Bounds, Is.Not.Null);
-            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(0, 0)));
-            Assert.That(viewport.Bounds.Width, Is.EqualTo(tileMap.Layers[0].Width));
-            Assert.That(viewport.Bounds.Height, Is.EqualTo(tileMap.Layers[0].Height));
-            Assert.That(viewport.TileMapLocation, Is.EqualTo(viewport.Bounds.BottomLeft));
-        }
 
         [Test]
-        public void Constructor_GivenATileMapWidthAndHeight_InitializesTheViewport()
+        public void Constructor_GivenAPositionAndSize_InitializesTheViewport()
         {
-            var viewport = new Viewport(tileMap, 16, 15);
+            var tileMapPosition = new Position(54, 53);
+            var viewport = new Viewport(16, 15, tileMapPosition);
 
-            Assert.That(viewport.TileMap, Is.EqualTo(tileMap));
             Assert.That(viewport.Bounds, Is.Not.Null);
-            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(0, 0)));
+            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(tileMapPosition));
             Assert.That(viewport.Bounds.Width, Is.EqualTo(16));
             Assert.That(viewport.Bounds.Height, Is.EqualTo(15));
-            Assert.That(viewport.TileMapLocation, Is.EqualTo(viewport.Bounds.BottomLeft));
-        }
-
-        [Test]
-        public void Constructor_GivenATileMapTileMapLocationAndSize_InitializesTheViewport()
-        {
-            var tileMapLocation = new Position(54, 53);
-            var viewport = new Viewport(tileMap, 16, 15, tileMapLocation);
-
-            Assert.That(viewport.TileMap, Is.EqualTo(tileMap));
-            Assert.That(viewport.Bounds, Is.Not.Null);
-            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(tileMapLocation));
-            Assert.That(viewport.Bounds.Width, Is.EqualTo(16));
-            Assert.That(viewport.Bounds.Height, Is.EqualTo(15));
-            Assert.That(viewport.TileMapLocation, Is.EqualTo(viewport.Bounds.BottomLeft));
+            Assert.That(viewport.Position, Is.EqualTo(viewport.Bounds.BottomLeft));
         }
 
         //[Test]
@@ -281,26 +257,26 @@ namespace Tests.Locations
         ////    Assert.That(1, _level.Viewport.MapOrigin.Y);
         ////}
 
-        //// Centering a viewport
-        //[Test]
-        //public void CenterAt_WithEvenViewportWidthAndViewportHeightAndEnoughSpaceAroundCenter_CentersViewportAtPosition()
-        //{
-        //    _level.SetUpViewport(6, 6);
+        // Focusing a viewport
+        [Test]
+        public void Focus_GivenAPositionAnsAViewportWithEvenWidthAndHeightAndEnoughSpaceAroundFocusPoint_FocusesViewportAtPosition()
+        {
+            Viewport viewport = new Viewport(6, 6);
 
-        //    _level.Viewport.CenterAt(new Position(5, 5));
+            viewport.Focus(new Position(5, 5));
 
-        //    Assert.That(_level.Viewport.MapLocation, Is.EqualTo(new Position(2, 2)));
-        //}
+            Assert.That(viewport.Position, Is.EqualTo(new Position(2, 2)));
+        }
 
-        //[Test]
-        //public void CenterAt_WithOddViewportWidthAndViewportHeightAndEnoughSpaceAroundCenter_CentersViewportAtPosition()
-        //{
-        //    _level.SetUpViewport(5, 5);
+        [Test]
+        public void Focus_GivenAPositionAndAViewportWithAnOddWidthAndHeightAndEnoughSpaceAroundFocusPoint_FocusesViewportAtPosition()
+        {
+            Viewport viewport = new Viewport(5, 5);
 
-        //    _level.Viewport.CenterAt(new Position(5, 5));
+            viewport.Focus(new Position(5, 5));
 
-        //    Assert.That(_level.Viewport.MapLocation, Is.EqualTo(new Position(3, 3)));
-        //}
+            Assert.That(viewport.Position, Is.EqualTo(new Position(3, 3)));
+        }
 
         //[Test]
         //public void CenterAt_WhenThereIsNotEnoughSpaceAroundCenter_CentersViewportAsMuchAsPossible()
