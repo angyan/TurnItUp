@@ -56,6 +56,7 @@
     <Compile Include="Tiled\Property.cs" />
     <Compile Include="Tiled\RenderOrder.cs" />
     <Compile Include="Tiled\Tileset.cs" />
+    <Compile Include="Utilities\Direction.cs" />
     <Compile Include="Utilities\IBounded.cs" />
     <Compile Include="Utilities\INamedElement.cs" />
     <Compile Include="Utilities\NamedElementCollection.cs" />

@@ -35,6 +35,11 @@ namespace Turnable.Utilities
             return (position.X >= BottomLeft.X && position.X <= TopRight.X && position.Y >= BottomLeft.Y && position.Y <= TopRight.Y);
         }
 
+        public bool Contains(Rectangle rectangle)
+        {
+            return (Contains(rectangle.BottomLeft) && Contains(rectangle.TopRight));
+        }
+
         public System.Collections.IEnumerator GetEnumerator()
         {
             for (int row = 0; row < Height; row++)
@@ -46,7 +51,7 @@ namespace Turnable.Utilities
             }
         }
 
-        public void Move(Position newPosition)
+        public void MoveTo(Position newPosition)
         {
             BottomLeft = newPosition;
         }

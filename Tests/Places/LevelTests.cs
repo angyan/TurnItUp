@@ -27,7 +27,7 @@ namespace Tests.Places
             Assert.That(level.Viewport, Is.Not.Null);
             Assert.That(level.Viewport.Bounds.Width, Is.EqualTo(16));
             Assert.That(level.Viewport.Bounds.Height, Is.EqualTo(16));
-            Assert.That(level.Viewport.Position, Is.EqualTo(new Position(0, 0)));
+            Assert.That(level.Viewport.Bounds.BottomLeft, Is.EqualTo(new Position(0, 0)));
         }
     }
 }

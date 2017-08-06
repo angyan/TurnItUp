@@ -18,6 +18,7 @@ namespace Turnable.Utilities
             {
                 Layers.Add(new TileMapLayer(layer.Name, layer.Width, layer.Height, layer.Data));
             }
+            Bounds = new Rectangle(new Position(0, 0), Map.Width, Map.Height);
         }
 
         public uint? GetTile(int x, int y, int layerIndex)

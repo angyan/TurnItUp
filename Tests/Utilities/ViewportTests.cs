@@ -35,7 +35,6 @@ namespace Tests.Places
             Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(0, 0)));
             Assert.That(viewport.Bounds.Width, Is.EqualTo(16));
             Assert.That(viewport.Bounds.Height, Is.EqualTo(15));
-            Assert.That(viewport.Position, Is.EqualTo(viewport.Bounds.BottomLeft));
         }
 
 
@@ -49,7 +48,6 @@ namespace Tests.Places
             Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(tileMapPosition));
             Assert.That(viewport.Bounds.Width, Is.EqualTo(16));
             Assert.That(viewport.Bounds.Height, Is.EqualTo(15));
-            Assert.That(viewport.Position, Is.EqualTo(viewport.Bounds.BottomLeft));
         }
 
         //[Test]
@@ -82,22 +80,49 @@ namespace Tests.Places
         //    Assert.That(_viewport.IsMapLocationValid(), Is.False);
         //}
 
-        //// -------------------
-        //// Move viewport tests
-        //// -------------------
+        // -------------------
+        // Move viewport tests
+        // -------------------
+        [Test]
+        public void MoveTo_GivenANewPositionWhenTheViewportRemainsFullyWithinBoundsOfTheTileMap_MovesTheViewportToTheNewPosition()
+        {
+            Position originalViewportPosition = new Position(3, 3);
+            Position newViewportPosition = new Position(4, 4);
+            Viewport viewport = new Viewport(6, 6, originalViewportPosition);
+
+            viewport.MoveTo(newViewportPosition);
+
+            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(newViewportPosition));
+        }
+
+        [Test]
+        public void MoveInDirection_GivenADirectionWhenTheViewportRemainsFullyWithinBoundsOfTheTileMap_MovesTheViewportInTheGivenDirection()
+        {
+            Position originalViewportPosition = new Position(3, 3);
+            Viewport viewport = new Viewport(6, 6, originalViewportPosition);
+
+            foreach (Direction direction in Enum.GetValues(typeof(Direction)))
+            {
+                viewport.MoveInDirection(direction, level.TileMap.Bounds);
+
+                Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(originalViewportPosition.NeighboringPosition(direction)));
+
+                viewport.MoveTo(originalViewportPosition);
+            }
+        }
 
         //[Test]
-        //public void Move_GivenADirectionAndAViewportThatRemainsFullyWithinBounds_MovesTheMapLocationInTheDirection()
+        //public void Move_GivenADirectionWhenTheViewportRemainsFullyWithinBoundsOfTheTileMap_MovesTheViewportInTheGivenDirection()
         //{
-        //    // Move MapLocation so that the viewport does not hit the bounds of the Map.
-        //    ((IBounded)_viewport).Bounds.Move(new Position(3, 3));
-        //    Position currentMapLocation = ((IBounded)_viewport).Bounds.BottomLeft;
+        //    Position originalViewportPosition = new Position(3, 3);
+        //    Viewport viewport = new Viewport(6, 6, originalViewportPosition);
 
         //    foreach (Direction direction in Enum.GetValues(typeof(Direction)))
         //    {
-        //        _viewport.Move(direction);
-        //        Assert.That(_viewport.MapLocation, Is.EqualTo(currentMapLocation.NeighboringPosition(direction)));
-        //        currentMapLocation = _viewport.MapLocation;
+        //        //viewport.Move(direction, level.TileMap.Bounds);
+        //        //Assert.That(viewport.Position, Is.EqualTo(originalViewportPosition.NeighboringPosition(direction)));
+        //        //viewPost.Move(originalViewportPosition);
+        //        ////currentMapLocation = _viewport.MapLocation;
         //    }
         //}
 
@@ -259,23 +284,23 @@ namespace Tests.Places
 
         // Focusing a viewport
         [Test]
-        public void Focus_GivenAPositionAnsAViewportWithEvenWidthAndHeightAndEnoughSpaceAroundFocusPoint_FocusesViewportAtPosition()
+        public void FocusOn_GivenAPositionAnsAViewportWithEvenWidthAndHeightAndEnoughSpaceAroundFocusPoint_FocusesViewportAtPosition()
         {
             Viewport viewport = new Viewport(6, 6);
 
-            viewport.Focus(new Position(5, 5));
+            viewport.FocusOn(new Position(5, 5));
 
-            Assert.That(viewport.Position, Is.EqualTo(new Position(2, 2)));
+            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(2, 2)));
         }
 
         [Test]
-        public void Focus_GivenAPositionAndAViewportWithAnOddWidthAndHeightAndEnoughSpaceAroundFocusPoint_FocusesViewportAtPosition()
+        public void FocusOn_GivenAPositionAndAViewportWithAnOddWidthAndHeightAndEnoughSpaceAroundFocusPoint_FocusesViewportAtPosition()
         {
             Viewport viewport = new Viewport(5, 5);
 
-            viewport.Focus(new Position(5, 5));
+            viewport.FocusOn(new Position(5, 5));
 
-            Assert.That(viewport.Position, Is.EqualTo(new Position(3, 3)));
+            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(3, 3)));
         }
 
         //[Test]
