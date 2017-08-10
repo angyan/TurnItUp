@@ -55,5 +55,10 @@ namespace Turnable.Utilities
         {
             BottomLeft = newPosition;
         }
+
+        public override string ToString()
+        {
+            return String.Format("Rectangle {{BottomLeft: {0}, TopRight: {1}}}", BottomLeft, TopRight);
+        }
     }
 }

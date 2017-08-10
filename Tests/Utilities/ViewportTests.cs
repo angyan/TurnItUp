@@ -111,72 +111,60 @@ namespace Tests.Places
             }
         }
 
-        //[Test]
-        //public void Move_GivenADirectionWhenTheViewportRemainsFullyWithinBoundsOfTheTileMap_MovesTheViewportInTheGivenDirection()
-        //{
-        //    Position originalViewportPosition = new Position(3, 3);
-        //    Viewport viewport = new Viewport(6, 6, originalViewportPosition);
+        [Test]
+        public void MoveInDirection_WhenViewportWouldMoveViewportOutOfTileMapBounds_MovesAsMuchAsPossible()
+        {
+            Viewport viewport = new Viewport(6, 6);
 
-        //    foreach (Direction direction in Enum.GetValues(typeof(Direction)))
-        //    {
-        //        //viewport.Move(direction, level.TileMap.Bounds);
-        //        //Assert.That(viewport.Position, Is.EqualTo(originalViewportPosition.NeighboringPosition(direction)));
-        //        //viewPost.Move(originalViewportPosition);
-        //        ////currentMapLocation = _viewport.MapLocation;
-        //    }
-        //}
+            // Viewport at lower left of the Map
+            viewport.MoveTo(new Position(0, 0));
 
-        //[Test]
-        //public void Viewport_MovingTheMapOriginOutOfBounds_MovesAsMuchAsPossible()
-        //{
-        //    // Viewport at lower left of the Map
-        //    ((IBounded)_viewport).Bounds.Move(new Position(0, 0));
+            viewport.MoveInDirection(Direction.South, level.TileMap.Bounds);
+            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(0, 0)));
+            viewport.MoveInDirection(Direction.SouthWest, level.TileMap.Bounds);
+            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(0, 0)));
+            viewport.MoveInDirection(Direction.West, level.TileMap.Bounds);
+            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(0, 0)));
+            viewport.MoveInDirection(Direction.NorthWest, level.TileMap.Bounds);
+            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(0, 1)));
 
-        //    _viewport.Move(Direction.West);
-        //    Assert.That(_viewport.MapLocation, Is.EqualTo(new Position(0, 0)));
-        //    _viewport.Move(Direction.NorthWest);
-        //    Assert.That(_viewport.MapLocation, Is.EqualTo(new Position(0, 1)));
-        //    _viewport.Move(Direction.SouthWest);
-        //    Assert.That(_viewport.MapLocation, Is.EqualTo(new Position(0, 0)));
-        //    _viewport.Move(Direction.South);
-        //    Assert.That(_viewport.MapLocation, Is.EqualTo(new Position(0, 0)));
+            // Viewport at bottom right of the Map
+            viewport.MoveTo(new Position(level.TileMap.Bounds.Width - viewport.Bounds.Width, 0));
+            Console.Write(level.TileMap.Bounds);
 
-        //    // Viewport at bottom right of the Map
-        //    ((IBounded)_viewport).Bounds.Move(new Position(10, 0));
+            viewport.MoveInDirection(Direction.South, level.TileMap.Bounds);
+            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(39, 0)));
+            viewport.MoveInDirection(Direction.SouthEast, level.TileMap.Bounds);
+            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(39, 0)));
+            viewport.MoveInDirection(Direction.East, level.TileMap.Bounds);
+            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(39, 0)));
+            viewport.MoveInDirection(Direction.NorthEast, level.TileMap.Bounds);
+            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(39, 1)));
 
-        //    _viewport.Move(Direction.East);
-        //    Assert.That(_viewport.MapLocation, Is.EqualTo(new Position(10, 0)));
-        //    _viewport.Move(Direction.NorthEast);
-        //    Assert.That(_viewport.MapLocation, Is.EqualTo(new Position(10, 1)));
-        //    _viewport.Move(Direction.SouthEast);
-        //    Assert.That(_viewport.MapLocation, Is.EqualTo(new Position(10, 0)));
-        //    _viewport.Move(Direction.South);
-        //    Assert.That(_viewport.MapLocation, Is.EqualTo(new Position(10, 0)));
+            // Viewport at top right of the Map
+            viewport.MoveTo(new Position(level.TileMap.Bounds.Width - viewport.Bounds.Width, level.TileMap.Bounds.Height - viewport.Bounds.Height));
 
-        //    // Viewport at top right of the Map
-        //    ((IBounded)_viewport).Bounds.Move(new Position(10, 10));
+            viewport.MoveInDirection(Direction.SouthEast, level.TileMap.Bounds);
+            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(39, 24)));
+            viewport.MoveInDirection(Direction.East, level.TileMap.Bounds);
+            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(39, 24)));
+            viewport.MoveInDirection(Direction.NorthEast, level.TileMap.Bounds);
+            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(39, 25)));
+            viewport.MoveInDirection(Direction.North, level.TileMap.Bounds);
+            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(39, 25)));
 
-        //    _viewport.Move(Direction.North);
-        //    Assert.That(_viewport.MapLocation, Is.EqualTo(new Position(10, 10)));
-        //    _viewport.Move(Direction.NorthEast);
-        //    Assert.That(_viewport.MapLocation, Is.EqualTo(new Position(10, 10)));
-        //    _viewport.Move(Direction.East);
-        //    Assert.That(_viewport.MapLocation, Is.EqualTo(new Position(10, 10)));
-        //    _viewport.Move(Direction.SouthEast);
-        //    Assert.That(_viewport.MapLocation, Is.EqualTo(new Position(10, 9)));
+            // Viewport at top left of the Map
+            viewport.MoveTo(new Position(0, level.TileMap.Bounds.Height - viewport.Bounds.Height));
 
-        //    // Viewport at top left of the Map
-        //    ((IBounded)_viewport).Bounds.Move(new Position(0, 10));
-
-        //    _viewport.Move(Direction.West);
-        //    Assert.That(_viewport.MapLocation, Is.EqualTo(new Position(0, 10)));
-        //    _viewport.Move(Direction.NorthWest);
-        //    Assert.That(_viewport.MapLocation, Is.EqualTo(new Position(0, 10)));
-        //    _viewport.Move(Direction.SouthWest);
-        //    Assert.That(_viewport.MapLocation, Is.EqualTo(new Position(0, 9)));
-        //    _viewport.Move(Direction.North);
-        //    Assert.That(_viewport.MapLocation, Is.EqualTo(new Position(0, 10)));
-        //}
+            viewport.MoveInDirection(Direction.North, level.TileMap.Bounds);
+            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(0, 25)));
+            viewport.MoveInDirection(Direction.NorthWest, level.TileMap.Bounds);
+            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(0, 25)));
+            viewport.MoveInDirection(Direction.West, level.TileMap.Bounds);
+            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(0, 25)));
+            viewport.MoveInDirection(Direction.SouthWest, level.TileMap.Bounds);
+            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(0, 24)));
+        }
 
         ////// Testing the automatic movement of MapOrigin when the player moves
         ////// Enough space on all sides to allow movement of MapOrigin

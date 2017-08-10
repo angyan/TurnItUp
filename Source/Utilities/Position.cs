@@ -89,7 +89,7 @@ namespace Turnable.Utilities
 
         public override string ToString()
         {
-            return String.Format("({0}, {1})", X, Y);
+            return String.Format("Position {{X: {0}; Y: {1}}}", X, Y);
         }
 
         public Position NeighboringPosition(Direction direction)
@@ -97,21 +97,21 @@ namespace Turnable.Utilities
             switch (direction)
             {
                 case Direction.North:
-                    return new Position(X, Y - 1);
+                    return new Position(X, Y + 1);
                 case Direction.NorthEast:
-                    return new Position(X + 1, Y-1);
+                    return new Position(X + 1, Y + 1);
                 case Direction.East:
                     return new Position(X + 1, Y);
                 case Direction.SouthEast:
-                    return new Position(X + 1, Y + 1);
+                    return new Position(X + 1, Y - 1);
                 case Direction.South:
-                    return new Position(X, Y + 1);
+                    return new Position(X, Y - 1);
                 case Direction.SouthWest:
-                    return new Position(X - 1, Y + 1);
+                    return new Position(X - 1, Y - 1);
                 case Direction.West:
                     return new Position(X - 1, Y);
                 case Direction.NorthWest:
-                    return new Position(X - 1, Y - 1);
+                    return new Position(X - 1, Y + 1);
                 default:
                     return this;
             }

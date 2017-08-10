@@ -121,5 +121,73 @@ namespace Tests.Utilities
             Assert.That(rectangle.Width, Is.EqualTo(2));
             Assert.That(rectangle.Height, Is.EqualTo(3));
         }
+
+        [Test]
+        public void Contains_GivenARectangleThatFitsIntoTheOtherRectangleEvenIfSomeEdgesOfBothRectangleTouch_ReturnsTrue()
+        {
+            Rectangle rectangle = new Rectangle(new Position(1, 1), 5, 4);
+
+            // A rectangle totally within the first rectangle
+            Rectangle otherRectangle = new Rectangle(new Position(2, 2), 2, 1);
+            Assert.That(rectangle.Contains(otherRectangle), Is.True);
+
+            // Rectangles that share some of the edges of the first rectangle
+            otherRectangle = new Rectangle(new Position(1, 1), 2, 1);
+            Assert.That(rectangle.Contains(otherRectangle), Is.True);
+            otherRectangle = new Rectangle(new Position(3, 1), 2, 1);
+            Assert.That(rectangle.Contains(otherRectangle), Is.True);
+            otherRectangle = new Rectangle(new Position(3, 4), 2, 1);
+            Assert.That(rectangle.Contains(otherRectangle), Is.True);
+            otherRectangle = new Rectangle(new Position(1, 4), 2, 1);
+            Assert.That(rectangle.Contains(otherRectangle), Is.True);
+
+            // Rectangle that is the exact size of the first rectangle
+            otherRectangle = new Rectangle(new Position(1, 1), 5, 4);
+            Assert.That(rectangle.Contains(otherRectangle), Is.True);
+        }
+
+        [Test]
+        public void Contains_GivenARectangleThatIsPartiallyInsideAndPartiallyOutsideTheOtherRectangle_ReturnsFalse()
+        {
+            Rectangle rectangle = new Rectangle(new Position(1, 1), 5, 4);
+
+            Rectangle otherRectangle = new Rectangle(new Position(0, 1), 2, 1);
+            Assert.That(rectangle.Contains(otherRectangle), Is.False);
+
+            otherRectangle = new Rectangle(new Position(5, 1), 2, 1);
+            Assert.That(rectangle.Contains(otherRectangle), Is.False);
+
+            otherRectangle = new Rectangle(new Position(1, 5), 2, 2);
+            Assert.That(rectangle.Contains(otherRectangle), Is.False);
+
+            otherRectangle = new Rectangle(new Position(5, 5), 2, 2);
+            Assert.That(rectangle.Contains(otherRectangle), Is.False);
+        }
+
+        [Test]
+        public void Contains_GivenARectangleThatIsCompletelyOutsideTheOtherRectangle_ReturnsFalse()
+        {
+            Rectangle rectangle = new Rectangle(new Position(1, 1), 5, 4);
+
+            Rectangle otherRectangle = new Rectangle(new Position(7, 7), 2, 1);
+            Assert.That(rectangle.Contains(otherRectangle), Is.False);
+        }
+
+        [Test]
+        public void Contains_GivenARectangleThatIsBiggerAndPlacedOverTheOtherRectangle_ReturnsFalse()
+        {
+            Rectangle rectangle = new Rectangle(new Position(1, 1), 5, 4);
+
+            Rectangle otherRectangle = new Rectangle(new Position(0, 0), 7, 7);
+            Assert.That(rectangle.Contains(otherRectangle), Is.False);
+        }
+
+        [Test]
+        public void ToString_DisplaysBottomLeftAndTopRightCorners()
+        {
+            Rectangle rectangle = new Rectangle(new Position(1, 1), 5, 4);
+
+            Assert.That(rectangle.ToString(), Is.EqualTo("Rectangle {BottomLeft: Position {X: 1, Y: 1}, TopRight: Position {X: 6, Y: 5}}"));
+        }
     }
 }
