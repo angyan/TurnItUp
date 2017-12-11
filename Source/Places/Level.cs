@@ -7,8 +7,15 @@ namespace Turnable.Places
     {
         public TileMap TileMap { get; set; }
         public Viewport Viewport { get; set; }
+        public Player Player { get; set; }
 
-        public Level(string fullPath)
+        public Level()
+        {
+            TileMap = null;
+            Viewport = null;
+        }
+
+        public Level(string fullPath) : this()
         {
             TileMap = new TileMap(fullPath);
             Viewport = new Viewport(16, 16);

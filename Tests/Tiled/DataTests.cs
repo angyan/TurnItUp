@@ -25,6 +25,5 @@ namespace Tests.Tiled
             Assert.That(data.Encoding, Is.EqualTo(Encoding.Base64));
             Assert.That(data.Compression, Is.EqualTo(Compression.Zlib));
         }
-
     }
 }

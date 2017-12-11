@@ -10,11 +10,20 @@ namespace Tests.Places
     public class LevelTests
     {
         [Test]
+        public void ParameterlessConstructorExists()
+        {
+            var level = new Level();
+
+            Assert.That(level.TileMap, Is.Null);
+            Assert.That(level.Viewport, Is.Null);
+        }
+
+        [Test]
         public void Constructor_GivenAFullPathToATmxFile_InitializesATileMap()
         {
             var fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Fixtures\orthogonal-outside.tmx");
 
-            Level level = new Level(fullPath);
+            var level = new Level(fullPath);
 
             // Was the TileMap loaded?
             Assert.That(level.TileMap, Is.Not.Null);

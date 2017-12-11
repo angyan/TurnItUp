@@ -187,7 +187,7 @@ namespace Tests.Utilities
         {
             Rectangle rectangle = new Rectangle(new Position(1, 1), 5, 4);
 
-            Assert.That(rectangle.ToString(), Is.EqualTo("Rectangle {BottomLeft: Position {X: 1, Y: 1}, TopRight: Position {X: 6, Y: 5}}"));
+            Assert.That(rectangle.ToString(), Is.EqualTo("Rectangle {BottomLeft: Position {X: 1, Y: 1}, TopRight: Position {X: 5, Y: 4}}"));
         }
     }
 }

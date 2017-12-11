@@ -37,7 +37,6 @@ namespace Tests.Places
             Assert.That(viewport.Bounds.Height, Is.EqualTo(15));
         }
 
-
         [Test]
         public void Constructor_GivenAPositionAndSize_InitializesTheViewport()
         {
@@ -276,7 +275,7 @@ namespace Tests.Places
         {
             Viewport viewport = new Viewport(6, 6);
 
-            viewport.FocusOn(new Position(5, 5));
+            viewport.FocusOn(new Position(5, 5), level.TileMap.Bounds);
 
             Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(2, 2)));
         }
@@ -286,34 +285,34 @@ namespace Tests.Places
         {
             Viewport viewport = new Viewport(5, 5);
 
-            viewport.FocusOn(new Position(5, 5));
+            viewport.FocusOn(new Position(5, 5), level.TileMap.Bounds);
 
             Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(3, 3)));
         }
 
-        //[Test]
-        //public void CenterAt_WhenThereIsNotEnoughSpaceAroundCenter_CentersViewportAsMuchAsPossible()
-        //{
-        //    _level.SetUpViewport(5, 5);
+        [Test]
+        public void FocusOn_WhenThereIsNotEnoughSpaceAroundFocus_FocusesViewportAsMuchAsPossible()
+        {
+            Viewport viewport = new Viewport(5, 5);
 
-        //    // Bottom left
-        //    _level.Viewport.CenterAt(new Position(0, 0));
-        //    Assert.That(_level.Viewport.MapLocation, Is.EqualTo(new Position(0, 0)));
+            // Bottom left
+            viewport.FocusOn(new Position(0, 0), level.TileMap.Bounds);
+            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(0, 0)));
 
-        //    // Bottom right
-        //    _level.Viewport.CenterAt(new Position(_level.Map.Width - 1, 0));
-        //    Assert.That(_level.Viewport.MapLocation.X, Is.EqualTo(_level.Map.Width - ((IBounded)_level.Viewport).Bounds.Width));
-        //    Assert.That(_level.Viewport.MapLocation.Y, Is.EqualTo(0));
+            //// Bottom right
+            //_level.Viewport.CenterAt(new Position(_level.Map.Width - 1, 0));
+            //Assert.That(_level.Viewport.MapLocation.X, Is.EqualTo(_level.Map.Width - ((IBounded)_level.Viewport).Bounds.Width));
+            //Assert.That(_level.Viewport.MapLocation.Y, Is.EqualTo(0));
 
-        //    // Top right
-        //    _level.Viewport.CenterAt(new Position(_level.Map.Width - 1, _level.Map.Height - 1));
-        //    Assert.That(_level.Viewport.MapLocation.X, Is.EqualTo(_level.Map.Width - ((IBounded)_level.Viewport).Bounds.Width));
-        //    Assert.That(_level.Viewport.MapLocation.Y, Is.EqualTo(_level.Map.Height - ((IBounded)_level.Viewport).Bounds.Height));
+            //// Top right
+            //_level.Viewport.CenterAt(new Position(_level.Map.Width - 1, _level.Map.Height - 1));
+            //Assert.That(_level.Viewport.MapLocation.X, Is.EqualTo(_level.Map.Width - ((IBounded)_level.Viewport).Bounds.Width));
+            //Assert.That(_level.Viewport.MapLocation.Y, Is.EqualTo(_level.Map.Height - ((IBounded)_level.Viewport).Bounds.Height));
 
-        //    // Top left
-        //    _level.Viewport.CenterAt(new Position(0, _level.Map.Height - 1));
-        //    Assert.That(_level.Viewport.MapLocation.X, Is.EqualTo(0));
-        //    Assert.That(_level.Viewport.MapLocation.Y, Is.EqualTo(_level.Map.Height - ((IBounded)_level.Viewport).Bounds.Height));
-        //}
+            //// Top left
+            //_level.Viewport.CenterAt(new Position(0, _level.Map.Height - 1));
+            //Assert.That(_level.Viewport.MapLocation.X, Is.EqualTo(0));
+            //Assert.That(_level.Viewport.MapLocation.Y, Is.EqualTo(_level.Map.Height - ((IBounded)_level.Viewport).Bounds.Height));
+        }
     }
 }

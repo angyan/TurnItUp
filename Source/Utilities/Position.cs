@@ -89,7 +89,7 @@ namespace Turnable.Utilities
 
         public override string ToString()
         {
-            return String.Format("Position {{X: {0}; Y: {1}}}", X, Y);
+            return String.Format("Position {{X: {0}, Y: {1}}}", X, Y);
         }
 
         public Position NeighboringPosition(Direction direction)

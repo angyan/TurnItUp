@@ -146,7 +146,7 @@ namespace Tests.Utilities
         {
             Position position = new Position(4, 5);
 
-            Assert.That(position.ToString(), Is.EqualTo("Position <X: 4; Y: 5>"));
+            Assert.That(position.ToString(), Is.EqualTo("Position {X: 4, Y: 5}"));
         }
 
         [Test]
