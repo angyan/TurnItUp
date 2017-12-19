@@ -2,7 +2,7 @@
 using Turnable.Places;
 using Turnable.Utilities;
 
-namespace Tests.Places
+namespace Turnable.Places
 {
     public class Viewport : IBounded
     {

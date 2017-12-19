@@ -16,7 +16,7 @@ namespace Tests.Characters
 
             Assert.That(level.Player, Is.EqualTo(player));
             Assert.That(player.Level, Is.EqualTo(level));
-            Assert.That(player.Position, Is.EqualTo(new Position(0, 0));
+            Assert.That(player.Position, Is.EqualTo(new Position(0, 0)));
             Assert.That(player.TileId, Is.EqualTo(1));
         }
     }

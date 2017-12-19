@@ -44,7 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Characters\Player.cs" />
     <Compile Include="Places\Level.cs" />
+    <Compile Include="Places\Movement.cs" />
+    <Compile Include="Places\MovementStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tiled\Encoding.cs" />
     <Compile Include="Tiled\Data.cs" />

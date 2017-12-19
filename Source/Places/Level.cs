@@ -1,4 +1,4 @@
-﻿using Tests.Places;
+﻿using Turnable.Characters;
 using Turnable.Utilities;
 
 namespace Turnable.Places
@@ -19,6 +19,14 @@ namespace Turnable.Places
         {
             TileMap = new TileMap(fullPath);
             Viewport = new Viewport(16, 16);
+        }
+
+        public Movement MovePlayerInDirection(Direction direction)
+        {
+            Movement returnValue = new Movement();
+
+            returnValue.Status = MovementStatus.Success;
+            return returnValue;
         }
     }
 }
