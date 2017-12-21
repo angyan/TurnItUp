@@ -1,4 +1,5 @@
-﻿using Turnable.Characters;
+﻿using System;
+using Turnable.Characters;
 using Turnable.Utilities;
 
 namespace Turnable.Places
@@ -25,7 +26,19 @@ namespace Turnable.Places
         {
             Movement returnValue = new Movement();
 
-            returnValue.Status = MovementStatus.Success;
+            Position newPlayerPosition = Player.Position.NeighboringPosition(direction);
+
+            if (TileMap.Bounds.Contains(newPlayerPosition))
+            {
+                returnValue.Status = MovementStatus.Success;
+                returnValue.Path.Add(Player.Position);
+                returnValue.Path.Add(newPlayerPosition);
+            }
+            else
+            {
+                returnValue.Status = MovementStatus.OutOfBounds;
+            }
+
             return returnValue;
         }
     }

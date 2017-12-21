@@ -79,6 +79,7 @@
     <Compile Include="Attributes\ExclusivelyUsesAttribute.cs" />
     <Compile Include="Characters\PlayerTests.cs" />
     <Compile Include="Places\LevelTests.cs" />
+    <Compile Include="Places\MovementTests.cs" />
     <Compile Include="Tiled\DataTests.cs" />
     <Compile Include="Tiled\LayerTests.cs" />
     <Compile Include="Tiled\TilesetTests.cs" />

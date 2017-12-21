@@ -45,7 +45,7 @@ namespace Tests.Places
         // Move player tests
         // -----------------
         [Test]
-        public void MoveCharacterInDirection_GivenADirectionWithNoObstacles_ReturnsAMovement()
+        public void MovePlayerInDirection_GivenADirectionWithNoObstacles_ReturnsAMovement()
         {
             var fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Fixtures\orthogonal-outside.tmx");
             var level = new Level(fullPath);
@@ -55,8 +55,21 @@ namespace Tests.Places
 
             Assert.That(movement.Status, Is.EqualTo(MovementStatus.Success));
             Assert.That(movement.Path.Count, Is.EqualTo(2));
-            Assert.That(movement.Path[0], Is.EqualTo(new Position(0, 0));
+            Assert.That(movement.Path[0], Is.EqualTo(new Position(0, 0)));
             Assert.That(movement.Path[1], Is.EqualTo(new Position(0, 0).NeighboringPosition(Direction.North)));
+        }
+
+        [Test]
+        public void MovePlayerInDirection_GivenADirectionWhichWouldMoveThePlayerOutOfBounds_ReturnsAMovement()
+        {
+            var fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Fixtures\orthogonal-outside.tmx");
+            var level = new Level(fullPath);
+            var player = new Player(new Position(0, 0), level, 1);
+
+            Movement movement = level.MovePlayerInDirection(Direction.South);
+
+            Assert.That(movement.Status, Is.EqualTo(MovementStatus.OutOfBounds));
+            Assert.That(movement.Path.Count, Is.EqualTo(0));
         }
     }
 }

@@ -7,6 +7,7 @@ namespace Turnable.Places
 {
     public enum MovementStatus
     {
+        None,
         Success,
         HitObstacle,
         HitCharacter,

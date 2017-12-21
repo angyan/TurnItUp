@@ -7,5 +7,10 @@ namespace Turnable.Places
     {
         public MovementStatus Status { get; set; }
         public List<Position> Path { get; set; }
+
+        public Movement()
+        {
+            Path = new List<Position>();
+        }
     }
 }
