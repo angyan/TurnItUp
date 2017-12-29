@@ -105,5 +105,16 @@ namespace Turnable.Utilities
         {
             Tiles.Remove(position);
         }
+
+        public void Fill(uint tileId)
+        {
+            for (int row = 0; row < Height; row++)
+            {
+                for (int col = 0; col < Width; col++)
+                {
+                    Tiles[new Position(col, row)] = tileId;
+                }
+            }
+        }
     }
 }

@@ -173,6 +173,20 @@ namespace Tests.Tiled
             Assert.That(() => tileMapLayer.RemoveTile(position), Throws.Nothing);
         }
 
+        [Test]
+        public void Fill_GivenATileId_FillsTheEntireTileMapLayerWithTiles()
+        {
+            tileMapLayer.Fill(1);
+
+            for (int col = 0; col < tileMapLayer.Width; col++)
+            {
+                for (int row = 0; row < tileMapLayer.Height; row++)
+                {
+                    Assert.That(tileMapLayer.Tiles[new Position(col, row)], Is.EqualTo(1));
+                }
+            }
+        }
+
         // TODO: Setting a tile, moving a tile or swapping tiles outside the bounds of the Layer is illegal, write unit tests for these scenarios
     }
 }

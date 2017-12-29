@@ -9,7 +9,6 @@ namespace Turnable.Characters
 {
     public class Player
     {
-        public uint TileId { get; set; }
         public Position Position { get; set; }
         public Level Level { get; set; }
 
@@ -17,8 +16,8 @@ namespace Turnable.Characters
         {
             Level = level;
             Position = position;
-            TileId = tileId;
             Level.Player = this;
+            Level.TileMap.Layers["Characters"].SetTile(position, tileId);
         }
     }
 }

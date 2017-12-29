@@ -20,6 +20,8 @@ namespace Turnable.Places
         {
             TileMap = new TileMap(fullPath);
             Viewport = new Viewport(16, 16);
+            // Add an empty TileMapLayer for Characters (PCs and NPCs)
+            TileMap.Layers.Add(new TileMapLayer("Characters", TileMap.Bounds.Width, TileMap.Bounds.Height));
         }
 
         public Movement MovePlayerInDirection(Direction direction)
@@ -33,6 +35,10 @@ namespace Turnable.Places
                 returnValue.Status = MovementStatus.Success;
                 returnValue.Path.Add(Player.Position);
                 returnValue.Path.Add(newPlayerPosition);
+                // Move the tile representing the player
+                TileMap.Layers["Characters"].MoveTile(Player.Position, newPlayerPosition);
+                // Move the player
+                Player.Position = newPlayerPosition;
             }
             else
             {
