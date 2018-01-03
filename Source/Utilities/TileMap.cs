@@ -23,7 +23,12 @@ namespace Turnable.Utilities
 
         public uint? GetTile(int x, int y, int layerIndex)
         {
-            return Layers[layerIndex].GetTile(new Position(x, y));
+            return GetTile(x, y, Layers[layerIndex]);
+        }
+
+        public uint? GetTile(int x, int y, TileMapLayer layer)
+        {
+            return layer.GetTile(new Position(x, y));
         }
     }
 }

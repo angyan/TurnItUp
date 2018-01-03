@@ -2,6 +2,7 @@
 using Turnable.Tiled;
 using Turnable.Utilities;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Tests.Tiled
 {
@@ -42,9 +43,9 @@ namespace Tests.Tiled
             Assert.That(tileMapLayer.Tiles[tileMapLayer.Tiles.Keys.First()], Is.EqualTo(223));
         }
 
-        // ************************
-        // Tile Manipulation Tests
-        // ************************
+        // *****************************
+        // START Tile Manipulation Tests
+        // *****************************
         [Test]
         public void GetTile_GivenAPositionWithNoTile_ReturnsNull()
         {
@@ -186,7 +187,30 @@ namespace Tests.Tiled
                 }
             }
         }
+        // *****************************
+        // END Tile Manipulation Tests
+        // *****************************
 
+        [Test]
+        public void GetObstacles_ReturnsAListOfPositionsOfAllTilesInTheLayerWhichAreViewedAsObstacles()
+        {
+            var tilePositions = new List<Position>();
+            tilePositions.Add(new Position(0, 0));
+            tilePositions.Add(new Position(0, 1));
+            tilePositions.Add(new Position(1, 3));
+            foreach (Position position in tilePositions)
+            {
+                tileMapLayer.SetTile(position, 1);
+            }
+
+            var obstacles = tileMapLayer.GetObstacles();
+
+            Assert.That(obstacles.Count, Is.EqualTo(tilePositions.Count));
+            foreach (Position position in tilePositions)
+            {
+                Assert.That(obstacles.Contains(position), Is.True);
+            }
+        }
         // TODO: Setting a tile, moving a tile or swapping tiles outside the bounds of the Layer is illegal, write unit tests for these scenarios
     }
 }

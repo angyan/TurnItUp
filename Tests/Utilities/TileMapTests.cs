@@ -48,5 +48,11 @@ namespace Tests.Tiled
         {
             Assert.That(tileMap.GetTile(0, 0, 0), Is.EqualTo(223));
         }
+
+        [Test]
+        public void GetTile_GivenXYAndLayer_ReturnsATile()
+        {
+            Assert.That(tileMap.GetTile(0, 0, tileMap.Layers[0]), Is.EqualTo(223));
+        }
     }
 }

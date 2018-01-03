@@ -116,5 +116,14 @@ namespace Turnable.Utilities
                 }
             }
         }
+
+        public List<Position> GetObstacles()
+        {
+            List<Position> returnValue = new List<Position>();
+
+            returnValue.AddRange(Tiles.Keys);
+
+            return returnValue;
+        }
     }
 }
