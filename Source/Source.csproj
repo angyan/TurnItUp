@@ -45,6 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Characters\Player.cs" />
+    <Compile Include="Pathfinding\NodeList.cs" />
+    <Compile Include="Pathfinding\Node.cs" />
+    <Compile Include="Pathfinding\Pathfinder.cs" />
     <Compile Include="Places\Level.cs" />
     <Compile Include="Places\Movement.cs" />
     <Compile Include="Places\MovementStatus.cs" />

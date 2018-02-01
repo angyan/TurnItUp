@@ -78,6 +78,9 @@
   <ItemGroup>
     <Compile Include="Attributes\ExclusivelyUsesAttribute.cs" />
     <Compile Include="Characters\PlayerTests.cs" />
+    <Compile Include="Pathfinding\NodeListTests.cs" />
+    <Compile Include="Pathfinding\PathfinderTests.cs" />
+    <Compile Include="Pathfinding\NodeTests.cs" />
     <Compile Include="Places\LevelTests.cs" />
     <Compile Include="Places\MovementTests.cs" />
     <Compile Include="Tiled\DataTests.cs" />

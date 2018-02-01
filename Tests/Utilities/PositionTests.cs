@@ -36,6 +36,39 @@ namespace Tests.Utilities
             Assert.That(clonedPosition.Y, Is.EqualTo(position.Y));
         }
 
+        [Test]
+        public void IsOrthogonalTo_WhenGivenAnotherPosition_ReturnsWhetherTheOtherPositionIsOrthogonalToTheCaller()
+        {
+            Position position = new Position(5, 5);
+
+            Position position2 = new Position(5, 6);
+            Assert.That(position.IsOrthogonalTo(position2), Is.True);
+
+            position2 = new Position(4, 5);
+            Assert.That(position.IsOrthogonalTo(position2), Is.True);
+
+            position2 = new Position(6, 6);
+            Assert.That(position.IsOrthogonalTo(position2), Is.False);
+        }
+
+        [Test]
+        public void IsDiagonalTo_WhenGivenAnotherPosition_ReturnsWhetherTheOtherPositionToTheCaller()
+        {
+            Position position = new Position(5, 5);
+
+            Position position2 = new Position(5, 6);
+            Assert.That(position.IsDiagonalTo(position2), Is.False);
+
+            position2 = new Position(4, 5);
+            Assert.That(position.IsDiagonalTo(position2), Is.False);
+
+            position2 = new Position(6, 6);
+            Assert.That(position.IsDiagonalTo(position2), Is.True);
+
+            position2 = new Position(7, 7);
+            Assert.That(position.IsDiagonalTo(position2), Is.True);
+        }
+
         // *********************************************************************
         // IEquatable<T> implementation tests
         // REF: https://msdn.microsoft.com/en-us/library/ms131190(v=vs.110).aspx

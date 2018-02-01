@@ -22,6 +22,16 @@ namespace Turnable.Utilities
             return new Position(X, Y);
         }
 
+        public bool IsOrthogonalTo(Position other)
+        {
+            return (other.X == X || other.Y == Y);
+        }
+
+        public bool IsDiagonalTo(Position other)
+        {
+            return (Math.Abs(other.X - X) == Math.Abs(other.Y - Y));
+        }
+
         public bool Equals(Position other)
         {
             if (other == null)
