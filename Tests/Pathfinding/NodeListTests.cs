@@ -12,14 +12,16 @@ namespace Tests.Pathfinding
     {
         private List<Node> nodes;
         private NodeList nodeList;
+        private Rectangle levelBounds;
 
         [SetUp]
         public void SetUp()
         {
+            levelBounds = new Rectangle(new Position(0, 0), new Position(15, 15));
             nodes = new List<Node>();
-            nodes.Add(new Node(new Position(1, 1)));
-            nodes.Add(new Node(new Position(2, 2)));
-            nodes.Add(new Node(new Position(3, 2)));
+            nodes.Add(new Node(levelBounds, new Position(1, 1)));
+            nodes.Add(new Node(levelBounds, new Position(2, 2)));
+            nodes.Add(new Node(levelBounds, new Position(3, 2)));
             nodeList = new NodeList();
         }
 

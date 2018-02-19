@@ -62,7 +62,7 @@ namespace Tests.Pathfinding
         }
 
         [Test]
-        public void GetAdjacentNodes_ReturnsAListContainingAllAdjacentNodes()
+        public void AdjacentNodes_ReturnsAListContainingAllAdjacentNodes()
         {
             Node node = new Node(levelBounds, new Position(5, 5));
 
@@ -80,7 +80,7 @@ namespace Tests.Pathfinding
         }
 
         [Test]
-        public void GetAdjacentNodes_DisregardsNodesThatAreOutOfBounds()
+        public void AdjacentNodes_DisregardsNodesThatAreOutOfBounds()
         {
             Node node = new Node(levelBounds, new Position(0, 0));
 
@@ -90,6 +90,20 @@ namespace Tests.Pathfinding
             Assert.That(adjacentNodePositions.Contains(new Position(1, 0)), Is.True);
             Assert.That(adjacentNodePositions.Contains(new Position(0, 1)), Is.True);
             Assert.That(adjacentNodePositions.Contains(new Position(1, 1)), Is.True);
+        }
+
+        [Test]
+        public void AdjacentNodes_WhenDiagonalMovementIsNotAllowed_OnlyReturnsAdjacentOrthogonalNodes()
+        {
+            var node = new Node(levelBounds, new Position(5, 5));
+
+            List<Position> adjacentNodePositions = node.AdjacentNodes().ConvertAll<Position>(n => n.Position);
+
+            Assert.That(adjacentNodePositions.Count, Is.EqualTo(4));
+            Assert.That(adjacentNodePositions.Contains(new Position(5, 4)), Is.True);
+            Assert.That(adjacentNodePositions.Contains(new Position(4, 5)), Is.True);
+            Assert.That(adjacentNodePositions.Contains(new Position(6, 5)), Is.True);
+            Assert.That(adjacentNodePositions.Contains(new Position(5, 6)), Is.True);
         }
 
         // ***************************************************************************************
@@ -155,9 +169,14 @@ namespace Tests.Pathfinding
             // Manhattan distance = (Sum of the horizontal and vertical distance) * OrthogonalMovementCost
             Node node = new Node(levelBounds, new Position(5, 5), null);
 
-            Assert.That(node.EstimatedMovementCost(new Position(4, 4)), Is.EqualTo(20));
-            Assert.That(node.EstimatedMovementCost(new Position(4, 5)), Is.EqualTo(10));
-            Assert.That(node.EstimatedMovementCost(new Position(5, 4)), Is.EqualTo(10));
+            Node otherNode = new Node(levelBounds, new Position(4, 4), null);
+            Assert.That(node.EstimatedMovementCost(otherNode), Is.EqualTo(20));
+
+            otherNode = new Node(levelBounds, new Position(4, 5), null);
+            Assert.That(node.EstimatedMovementCost(otherNode), Is.EqualTo(10));
+
+            otherNode = new Node(levelBounds, new Position(5, 4), null);
+            Assert.That(node.EstimatedMovementCost(otherNode), Is.EqualTo(10));
         }
         // *********************************************************************
         // IEquatable<T> implementation tests

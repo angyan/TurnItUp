@@ -9,7 +9,6 @@ namespace Turnable.Pathfinding
         public Node Parent { get; set; }
         public Position Position { get; private set; }
         public Rectangle LevelBounds { get; private set; }
-        public int EstimatedMovementCost { get; set; }
         public const int OrthogonalMovementCost = 10;
         public const int DiagonalMovementCost = 14;
 
@@ -45,19 +44,36 @@ namespace Turnable.Pathfinding
             return LevelBounds.Contains(Position);
         }
 
-        public List<Node> AdjacentNodes()
+        public List<Node> AdjacentNodes(bool diagonalMovementAllowed = true)
         {
             List<Node> returnValue = new List<Node>();
 
             foreach (Direction direction in Enum.GetValues(typeof(Direction)))
             {
-                returnValue.Add(new Node(LevelBounds, Position.NeighboringPosition(direction)));
+                // Don't add diagonal nodes if diagonal movement is not allowed.
+                if (!diagonalMovementAllowed)
+                {
+                    if (direction != Direction.NorthEast && direction != Direction.NorthWest && direction != Direction.SouthEast && direction != Direction.SouthWest)
+                    {
+                        returnValue.Add(new Node(LevelBounds, Position.NeighboringPosition(direction)));
+                    }
+                }
+                else
+                {
+                    returnValue.Add(new Node(LevelBounds, Position.NeighboringPosition(direction)));
+                }
             }
 
             // Remove all nodes that are out of bounds
             returnValue.RemoveAll(n => !n.IsWithinBounds());
 
             return returnValue;
+        }
+
+        public int EstimatedMovementCost(Node node)
+        {
+            // Manhattan distance = (Sum of the horizontal and vertical distance) * OrthogonalMovementCost
+            return (Math.Abs(Position.X - node.Position.X) + Math.Abs(Position.Y - node.Position.Y)) * Node.OrthogonalMovementCost;
         }
 
         public bool Equals(Node other)
