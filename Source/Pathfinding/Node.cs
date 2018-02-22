@@ -11,6 +11,7 @@ namespace Turnable.Pathfinding
         public Rectangle LevelBounds { get; private set; }
         public const int OrthogonalMovementCost = 10;
         public const int DiagonalMovementCost = 14;
+        public int EstimatedMovementCost { get; private set; }
 
         public Node(Rectangle levelBounds, Position position, Node parent = null)
         {
@@ -37,6 +38,12 @@ namespace Turnable.Pathfinding
 
                 return 0;
             }
+        }
+
+        public void CalculateEstimatedMovementCost(Node node)
+        {
+            // Manhattan distance = (Sum of the horizontal and vertical distance) * OrthogonalMovementCost
+            EstimatedMovementCost = (Math.Abs(Position.X - node.Position.X) + Math.Abs(Position.Y - node.Position.Y)) * Node.OrthogonalMovementCost;
         }
 
         public bool IsWithinBounds()
@@ -68,12 +75,6 @@ namespace Turnable.Pathfinding
             returnValue.RemoveAll(n => !n.IsWithinBounds());
 
             return returnValue;
-        }
-
-        public int EstimatedMovementCost(Node node)
-        {
-            // Manhattan distance = (Sum of the horizontal and vertical distance) * OrthogonalMovementCost
-            return (Math.Abs(Position.X - node.Position.X) + Math.Abs(Position.Y - node.Position.Y)) * Node.OrthogonalMovementCost;
         }
 
         public bool Equals(Node other)

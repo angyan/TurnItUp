@@ -75,63 +75,63 @@ namespace Tests.Pathfinding
             Assert.That(path[1], Is.EqualTo(new Position(5, 5)));
         }
 
-        //[Test]
-        //public void FindPath_GivenAStartAndEndPositionWhichAreOrthogonallySeparatedWithNoObstaclesBetweenThem_FindsPath()
-        //{
-        //    List<Position> path = pathfinder.FindPath(new Position(1, 1), new Position(4, 1), obstacles);
+        [Test]
+        public void FindPath_GivenAStartAndEndPositionWhichAreOrthogonallySeparatedWithNoObstaclesBetweenThem_FindsPath()
+        {
+            List<Position> path = pathfinder.FindPath(new Position(1, 1), new Position(4, 1), obstacles);
 
-        //    Assert.That(path, Is.Not.Null);
-        //    Assert.That(path.Count, Is.EqualTo(4));
-        //    Assert.That(path[0], Is.EqualTo(new Position(1, 1)));
-        //    Assert.That(path[1], Is.EqualTo(new Position(2, 1)));
-        //    Assert.That(path[2], Is.EqualTo(new Position(3, 1)));
-        //    Assert.That(path[3], Is.EqualTo(new Position(4, 1)));
-        //}
+            Assert.That(path, Is.Not.Null);
+            Assert.That(path.Count, Is.EqualTo(4));
+            Assert.That(path[0], Is.EqualTo(new Position(1, 1)));
+            Assert.That(path[1], Is.EqualTo(new Position(2, 1)));
+            Assert.That(path[2], Is.EqualTo(new Position(3, 1)));
+            Assert.That(path[3], Is.EqualTo(new Position(4, 1)));
+        }
 
-        //[Test]
-        //public void FindPath_GivenAStartAndEndPositionWhichAreDiagonallySeparatedWithNoObstaclesBetweenThem_FindsPath()
-        //{
-        //    List<Position> path = pathfinder.FindPath(new Position(3, 5), new Position(5, 7), obstacles);
+        [Test]
+        public void FindPath_GivenAStartAndEndPositionWhichAreDiagonallySeparatedWithNoObstaclesBetweenThem_FindsPath()
+        {
+            List<Position> path = pathfinder.FindPath(new Position(3, 5), new Position(5, 7), obstacles);
 
-        //    Assert.That(path, Is.Not.Null);
-        //    Assert.That(path.Count, Is.EqualTo(3));
-        //    Assert.That(path[0], Is.EqualTo(new Position(3, 5)));
-        //    Assert.That(path[1], Is.EqualTo(new Position(4, 6)));
-        //    Assert.That(path[2], Is.EqualTo(new Position(5, 7)));
-        //}
+            Assert.That(path, Is.Not.Null);
+            Assert.That(path.Count, Is.EqualTo(3));
+            Assert.That(path[0], Is.EqualTo(new Position(3, 5)));
+            Assert.That(path[1], Is.EqualTo(new Position(4, 6)));
+            Assert.That(path[2], Is.EqualTo(new Position(5, 7)));
+        }
 
-        //[Test]
-        //public void FindPath_GivenAStartAndEndPositionWhichAreOrthogonallySeparatedAndHaveOneObstacleBetweenThem_FindsPath()
-        //{
-        //    // Obstacle at (6, 5)
-        //    obstacles.Add(new Position(6, 5));
-        //    List<Position> path = pathfinder.FindPath(new Position(6, 3), new Position(6, 7), obstacles);
+        [Test]
+        public void FindPath_GivenAStartAndEndPositionWhichAreOrthogonallySeparatedAndHaveOneObstacleBetweenThem_FindsPath()
+        {
+            // Obstacle at (6, 5)
+            obstacles.Add(new Position(6, 5));
+            List<Position> path = pathfinder.FindPath(new Position(6, 3), new Position(6, 7), obstacles);
 
-        //    Assert.That(path, Is.Not.Null);
-        //    Assert.That(path.Count, Is.EqualTo(5));
-        //    Assert.That(path[0], Is.EqualTo(new Position(6, 3)));
-        //    Assert.That(path[1], Is.EqualTo(new Position(6, 4)));
-        //    Assert.That(path[2], Is.EqualTo(new Position(5, 5)));
-        //    Assert.That(path[3], Is.EqualTo(new Position(6, 6)));
-        //    Assert.That(path[4], Is.EqualTo(new Position(6, 7)));
-        //}
+            Assert.That(path, Is.Not.Null);
+            Assert.That(path.Count, Is.EqualTo(5));
+            Assert.That(path[0], Is.EqualTo(new Position(6, 3)));
+            Assert.That(path[1], Is.EqualTo(new Position(6, 4)));
+            Assert.That(path[2], Is.EqualTo(new Position(7, 5)));
+            Assert.That(path[3], Is.EqualTo(new Position(7, 6)));
+            Assert.That(path[4], Is.EqualTo(new Position(6, 7)));
+        }
 
-        //[Test]
-        //public void FindPath_GivenAStartAndEndPositionWhichAreDiagonallySeparatedAndHaveOneObstacleBetweenThem_FindsPath()
-        //{
-        //    // Obstacle at (6, 5)
-        //    obstacles.Add(new Position(6, 5));
-        //    List<Position> path = pathfinder.FindPath(new Position(4, 3), new Position(8, 7), obstacles);
+        [Test]
+        public void FindPath_GivenAStartAndEndPositionWhichAreDiagonallySeparatedAndHaveOneObstacleBetweenThem_FindsPath()
+        {
+            // Obstacle at (6, 5)
+            obstacles.Add(new Position(6, 5));
+            List<Position> path = pathfinder.FindPath(new Position(4, 3), new Position(8, 7), obstacles);
 
-        //    Assert.That(path, Is.Not.Null);
-        //    Assert.That(path.Count, Is.EqualTo(6));
-        //    Assert.That(path[0], Is.EqualTo(new Position(4, 3)));
-        //    Assert.That(path[1], Is.EqualTo(new Position(5, 4)));
-        //    Assert.That(path[2], Is.EqualTo(new Position(6, 4)));
-        //    Assert.That(path[3], Is.EqualTo(new Position(7, 5)));
-        //    Assert.That(path[4], Is.EqualTo(new Position(8, 6)));
-        //    Assert.That(path[5], Is.EqualTo(new Position(8, 7)));
-        //}
+            Assert.That(path, Is.Not.Null);
+            Assert.That(path.Count, Is.EqualTo(6));
+            Assert.That(path[0], Is.EqualTo(new Position(4, 3)));
+            Assert.That(path[1], Is.EqualTo(new Position(4, 4)));
+            Assert.That(path[2], Is.EqualTo(new Position(5, 5)));
+            Assert.That(path[3], Is.EqualTo(new Position(6, 6)));
+            Assert.That(path[4], Is.EqualTo(new Position(7, 7)));
+            Assert.That(path[5], Is.EqualTo(new Position(8, 7)));
+        }
 
         //[Test]
         //public void FindPath_WhenEndingNodeIsUnreachable_ReturnsNull()

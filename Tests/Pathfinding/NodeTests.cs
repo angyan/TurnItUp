@@ -97,7 +97,7 @@ namespace Tests.Pathfinding
         {
             var node = new Node(levelBounds, new Position(5, 5));
 
-            List<Position> adjacentNodePositions = node.AdjacentNodes().ConvertAll<Position>(n => n.Position);
+            List<Position> adjacentNodePositions = node.AdjacentNodes(false).ConvertAll<Position>(n => n.Position);
 
             Assert.That(adjacentNodePositions.Count, Is.EqualTo(4));
             Assert.That(adjacentNodePositions.Contains(new Position(5, 4)), Is.True);
@@ -164,19 +164,22 @@ namespace Tests.Pathfinding
         }
 
         [Test]
-        public void EstimatedMovementCost_IsCalculatedAsTheManhattanDistanceBetweenTwoPositions()
+        public void CalculateEstimatedMovementCost_CalculatesAndStoresTheManhattanDistanceBetweenTwoPositions()
         {
             // Manhattan distance = (Sum of the horizontal and vertical distance) * OrthogonalMovementCost
             Node node = new Node(levelBounds, new Position(5, 5), null);
 
             Node otherNode = new Node(levelBounds, new Position(4, 4), null);
-            Assert.That(node.EstimatedMovementCost(otherNode), Is.EqualTo(20));
+            node.CalculateEstimatedMovementCost(otherNode);
+            Assert.That(node.EstimatedMovementCost, Is.EqualTo(20));
 
             otherNode = new Node(levelBounds, new Position(4, 5), null);
-            Assert.That(node.EstimatedMovementCost(otherNode), Is.EqualTo(10));
+            node.CalculateEstimatedMovementCost(otherNode);
+            Assert.That(node.EstimatedMovementCost, Is.EqualTo(10));
 
             otherNode = new Node(levelBounds, new Position(5, 4), null);
-            Assert.That(node.EstimatedMovementCost(otherNode), Is.EqualTo(10));
+            node.CalculateEstimatedMovementCost(otherNode);
+            Assert.That(node.EstimatedMovementCost, Is.EqualTo(10));
         }
         // *********************************************************************
         // IEquatable<T> implementation tests
