@@ -60,9 +60,9 @@ namespace Tests.Places
             Assert.That(visibleDistance, Is.EqualTo(2.236).Within(0.001));
         }
 
-        //--------------------------------
+        //-------------------------
         // FOV Calculation Examples
-        //--------------------------------
+        //-------------------------
 
         [Test]
         public void CalculateFieldOfView_GivenAVisualRangeOf0_ReturnsOnlyTheStart()
@@ -210,105 +210,5 @@ namespace Tests.Places
             Assert.That(visiblePositions.Contains(new Position(7, 4)), Is.True);
             Assert.That(visiblePositions.Contains(new Position(6, 5)), Is.True);
         }
-
-        ////--------------------------------
-        //// LoS (Line of Sight) Calculation Examples
-        ////--------------------------------
-
-        //// The sample level:
-        //// XXXXXXXXXXXXXXXX
-        //// X....EEE.......X
-        //// X..........X...X
-        //// X.......E......X
-        //// X.E.X..........X
-        //// X.....E....E...X
-        //// X........X.....X
-        //// X..........XXXXX
-        //// X..........X...X
-        //// X..........X...X
-        //// X......X.......X
-        //// X.X........X...X
-        //// X..........X...X
-        //// X..........X...X
-        //// X......P...X...X
-        //// XXXXXXXXXXXXXXXX
-        //// X - Obstacles, P - Player, E - Enemies
-
-        //// No Obstacles in between starting and ending position
-        //[Test]
-        //public void VisionCalculator_ForAVisualRangeOf1AndAnEndingPositionInTheVisualRange_ReturnsTrue()
-        //{
-        //    Position startingPosition = new Position(2, 2);
-
-        //    Node startingNode = new Node(_level, 2, 2);
-
-        //    // Only orthogonal nodes are in a visual range of 1 from the starting position
-        //    foreach (Node node in startingNode.GetAdjacentNodes(false))
-        //    {
-        //        Assert.IsTrue(_visionCalculator.IsInLineOfSight(startingPosition, node.Position, 1));
-        //    }
-        //}
-
-        //[Test]
-        //public void VisionCalculator_ForAVisualRangeOf1AndAnEndingPositionNotInTheVisualRange_ReturnsFalse()
-        //{
-        //    Position startingPosition = new Position(2, 2);
-
-        //    Node startingNode = new Node(_level, 2, 2);
-
-        //    // All diagonal nodes are not in a visual range of 1 from the starting position
-        //    foreach (Node node in startingNode.GetAdjacentNodes(true))
-        //    {
-        //        if (!node.IsOrthogonalTo(new Node(_level, startingPosition.X, startingPosition.Y)))
-        //        {
-        //            Assert.IsFalse(_visionCalculator.IsInLineOfSight(startingPosition, node.Position, 1));
-        //        }
-        //    }
-        //}
-
-        //[Test]
-        //public void VisionCalculator_ForAVisualRangeOf2AndAnEndingPositionInTheVisualRange_ReturnsTrue()
-        //{
-        //    Position startingPosition = new Position(2, 2);
-
-        //    Node startingNode = new Node(_level, 2, 2);
-
-        //    // All adjacent nodes including diagonal nodes are in a visual range of 2 from the starting position
-        //    foreach (Node node in startingNode.GetAdjacentNodes(false))
-        //    {
-        //        Assert.IsTrue(_visionCalculator.IsInLineOfSight(startingPosition, node.Position, 2));
-        //    }
-        //}
-
-        //[Test]
-        //public void VisionCalculator_ForAVisualRangeOf3AndAnEndingPositionInTheVisualRange_ReturnsTrue()
-        //{
-        //    Position startingPosition = new Position(1, 1);
-
-        //    Position endingPosition = new Position(3, 3);
-
-        //    Assert.IsTrue(_visionCalculator.IsInLineOfSight(startingPosition, endingPosition, 3));
-        //}
-
-        //[Test]
-        //public void VisionCalculator_ForAVisualRangeOf3AndAnEndingPositionOutsideTheVisualRange_ReturnsFalse()
-        //{
-        //    Position startingPosition = new Position(1, 1);
-
-        //    Position endingPosition = new Position(4, 4);
-
-        //    Assert.IsFalse(_visionCalculator.IsInLineOfSight(startingPosition, endingPosition, 3));
-        //}
-
-        //// Obstacles in between starting and ending position
-        //[Test]
-        //public void VisionCalculator_ForAVisualRangeOf3WithAnObstacleBetweenStartingAndEndingPosition_ReturnsFalse()
-        //{
-        //    Position startingPosition = new Position(1, 4);
-
-        //    Position endingPosition = new Position(3, 5);
-
-        //    Assert.IsFalse(_visionCalculator.IsInLineOfSight(startingPosition, endingPosition, 3));
-        //}
     }
 }
