@@ -94,115 +94,122 @@ namespace Tests.Places
             obstacles.Add(new Position(7, 4));
             List<Position> visiblePositions = visionCalculator.CalculateFieldOfView(new Position(6, 4), 1, obstacles);
 
-            Assert.That(visiblePositions.Count(), Is.EqualTo(5));
-            Assert.That(distinctVisiblePositions.Contains(new Position(6, 4)), Is.True);
-            Assert.That(distinctVisiblePositions.Contains(new Position(6, 5)), Is.True);
-            Assert.That(distinctVisiblePositions.Contains(new Position(6, 3)), Is.True);
-            Assert.That(distinctVisiblePositions.Contains(new Position(5, 4)), Is.True);
-            Assert.That(distinctVisiblePositions.Contains(new Position(7, 4)), Is.True);
+            Assert.That(visiblePositions.Count, Is.EqualTo(5));
+            Assert.That(visiblePositions.Contains(new Position(6, 4)), Is.True);
+            Assert.That(visiblePositions.Contains(new Position(6, 5)), Is.True);
+            Assert.That(visiblePositions.Contains(new Position(6, 3)), Is.True);
+            Assert.That(visiblePositions.Contains(new Position(5, 4)), Is.True);
+            Assert.That(visiblePositions.Contains(new Position(7, 4)), Is.True);
         }
 
-        //// Testing each octant in the FOV with a VisualRange = 2
-        //// Obstacle at 6,5
-        //// With a VisualRange of 2 using the current algorithm, only obstacles directly to the E, N, W or S will block off a visible position
-        ////   X
-        ////  XXX
-        //// XXOXX
-        ////  XXX
-        ////   X
-        //// With a Visual Range of 2, the FOV is every adjacent tile as well as two tiles in the E, N, W and S direction. 
+        // Testing with an obstacle in each of the eight directions right next to the start and with a visual range of 2
+        // With a VisualRange of 2 using the current algorithm, only obstacles directly to the E, N, W or S will block off a visible position
+        //   X
+        //  XXX
+        // XXOXX
+        //  XXX
+        //   X
+        // With a Visual Range of 2, the FOV is every adjacent tile as well as two tiles in the E, N, W and S direction. 
 
-        //// Obstacle to the N
-        //[Test]
-        //public void CalculateVisiblePositions_ForAVisualRangeOf2AndObstacleToTheNorth_CorrectlyCalculatesTheVisiblePositions()
-        //{
-        //    List<Position> visiblePositions = _visionCalculator.CalculateVisiblePositions(6, 4, 2);
+        // Obstacle to the N
+        [Test]
+        public void CalculateVisiblePositions_ForAVisualRangeOf2AndObstacleToTheNorth_CorrectlyCalculatesTheVisiblePositions()
+        {
+            obstacles.Add(new Position(6, 5));
+            List<Position> visiblePositions = visionCalculator.CalculateFieldOfView(new Position(6, 4), 2, obstacles);
 
-        //    Assert.That(visiblePositions.Count<Position>(), Is.EqualTo(12));
-        //    Assert.That(visiblePositions.Contains(new Position(6, 4)), Is.True);
-        //    Assert.That(visiblePositions.Contains(new Position(6, 5)), Is.True);
-        //    Assert.That(visiblePositions.Contains(new Position(6, 6)), Is.False);
-        //}
+            Assert.That(visiblePositions.Count, Is.EqualTo(12));
+            Assert.That(visiblePositions.Contains(new Position(6, 4)), Is.True);
+            Assert.That(visiblePositions.Contains(new Position(6, 5)), Is.True);
+            Assert.That(visiblePositions.Contains(new Position(6, 6)), Is.False);
+        }
 
-        //// Obstacle to the NE
-        //[Test]
-        //public void CalculateVisiblePositions_ForAVisualRangeOf2AndObstacleToTheNorthEast_CorrectlyCalculatesTheVisiblePositions()
-        //{
-        //    List<Position> visiblePositions = _visionCalculator.CalculateVisiblePositions(5, 4, 2);
+        // Obstacle to the NE
+        [Test]
+        public void CalculateVisiblePositions_ForAVisualRangeOf2AndObstacleToTheNorthEast_CorrectlyCalculatesTheVisiblePositions()
+        {
+            obstacles.Add(new Position(6, 5));
+            List<Position> visiblePositions = visionCalculator.CalculateFieldOfView(new Position(5, 4), 2, obstacles);
 
-        //    Assert.That(visiblePositions.Count<Position>(), Is.EqualTo(13));
-        //    Assert.That(visiblePositions.Contains(new Position(5, 4)), Is.True);
-        //    Assert.That(visiblePositions.Contains(new Position(6, 5)), Is.True);
-        //}
+            Assert.That(visiblePositions.Count, Is.EqualTo(13));
+            Assert.That(visiblePositions.Contains(new Position(5, 4)), Is.True);
+            Assert.That(visiblePositions.Contains(new Position(6, 5)), Is.True);
+        }
 
-        //// Obstacle to the E
-        //[Test]
-        //public void CalculateVisiblePositions_ForAVisualRangeOf2AndObstacleToTheEast_CorrectlyCalculatesTheVisiblePositions()
-        //{
-        //    List<Position> visiblePositions = _visionCalculator.CalculateVisiblePositions(5, 5, 2);
+        // Obstacle to the E
+        [Test]
+        public void CalculateVisiblePositions_ForAVisualRangeOf2AndObstacleToTheEast_CorrectlyCalculatesTheVisiblePositions()
+        {
+            obstacles.Add(new Position(6, 5));
+            List<Position> visiblePositions = visionCalculator.CalculateFieldOfView(new Position(5, 5), 2, obstacles);
 
-        //    Assert.That(visiblePositions.Count<Position>(), Is.EqualTo(12));
-        //    Assert.That(visiblePositions.Contains(new Position(5, 5)), Is.True);
-        //    Assert.That(visiblePositions.Contains(new Position(6, 5)), Is.True);
-        //    Assert.That(visiblePositions.Contains(new Position(7, 5)), Is.False);
-        //}
+            Assert.That(visiblePositions.Count, Is.EqualTo(12));
+            Assert.That(visiblePositions.Contains(new Position(5, 5)), Is.True);
+            Assert.That(visiblePositions.Contains(new Position(6, 5)), Is.True);
+            Assert.That(visiblePositions.Contains(new Position(7, 5)), Is.False);
+        }
 
-        //// Obstacle to the SE
-        //[Test]
-        //public void CalculateVisiblePositions_ForAVisualRangeOf2AndObstacleToTheSouthEast_CorrectlyCalculatesTheVisiblePositions()
-        //{
-        //    List<Position> visiblePositions = _visionCalculator.CalculateVisiblePositions(5, 6, 2);
+        // Obstacle to the SE
+        [Test]
+        public void CalculateVisiblePositions_ForAVisualRangeOf2AndObstacleToTheSouthEast_CorrectlyCalculatesTheVisiblePositions()
+        {
+            obstacles.Add(new Position(6, 5));
+            List<Position> visiblePositions = visionCalculator.CalculateFieldOfView(new Position(5, 6), 2, obstacles);
 
-        //    Assert.That(visiblePositions.Count<Position>(), Is.EqualTo(13));
-        //    Assert.That(visiblePositions.Contains(new Position(5, 6)), Is.True);
-        //    Assert.That(visiblePositions.Contains(new Position(6, 5)), Is.True);
-        //}
+            Assert.That(visiblePositions.Count, Is.EqualTo(13));
+            Assert.That(visiblePositions.Contains(new Position(5, 6)), Is.True);
+            Assert.That(visiblePositions.Contains(new Position(6, 5)), Is.True);
+        }
 
-        //// Obstacle to the S
-        //[Test]
-        //public void CalculateVisiblePositions_ForAVisualRangeOf2AndObstacleToTheSouth_CorrectlyCalculatesTheVisiblePositions()
-        //{
-        //    List<Position> visiblePositions = _visionCalculator.CalculateVisiblePositions(6, 6, 2);
+        // Obstacle to the S
+        [Test]
+        public void CalculateVisiblePositions_ForAVisualRangeOf2AndObstacleToTheSouth_CorrectlyCalculatesTheVisiblePositions()
+        {
+            obstacles.Add(new Position(6, 5));
+            List<Position> visiblePositions = visionCalculator.CalculateFieldOfView(new Position(6, 6), 2, obstacles);
 
-        //    Assert.That(visiblePositions.Count<Position>(), Is.EqualTo(12));
-        //    Assert.That(visiblePositions.Contains(new Position(6, 6)), Is.True);
-        //    Assert.That(visiblePositions.Contains(new Position(6, 5)), Is.True);
-        //    Assert.That(visiblePositions.Contains(new Position(6, 4)), Is.False);
-        //}
+            Assert.That(visiblePositions.Count, Is.EqualTo(12));
+            Assert.That(visiblePositions.Contains(new Position(6, 6)), Is.True);
+            Assert.That(visiblePositions.Contains(new Position(6, 5)), Is.True);
+            Assert.That(visiblePositions.Contains(new Position(6, 4)), Is.False);
+        }
 
-        //// Obstacle to the SW
-        //[Test]
-        //public void VisionCalculator_ForAVisualRangeOf2AndObstacleToTheSouthWest_CorrectlyCalculatesTheVisiblePositions()
-        //{
-        //    List<Position> visiblePositions = _visionCalculator.CalculateVisiblePositions(7, 6, 2);
+        // Obstacle to the SW
+        [Test]
+        public void VisionCalculator_ForAVisualRangeOf2AndObstacleToTheSouthWest_CorrectlyCalculatesTheVisiblePositions()
+        {
+            obstacles.Add(new Position(6, 5));
+            List<Position> visiblePositions = visionCalculator.CalculateFieldOfView(new Position(7, 6), 2, obstacles);
 
-        //    Assert.That(visiblePositions.Count<Position>(), Is.EqualTo(13));
-        //    Assert.That(visiblePositions.Contains(new Position(7, 6)), Is.True);
-        //    Assert.That(visiblePositions.Contains(new Position(6, 5)), Is.True);
-        //}
+            Assert.That(visiblePositions.Count, Is.EqualTo(13));
+            Assert.That(visiblePositions.Contains(new Position(7, 6)), Is.True);
+            Assert.That(visiblePositions.Contains(new Position(6, 5)), Is.True);
+        }
 
-        //// Obstacle to the W
-        //[Test]
-        //public void VisionCalculator_ForAVisualRangeOf2AndObstacleToTheWest_CorrectlyCalculatesTheVisiblePositions()
-        //{
-        //    List<Position> visiblePositions = _visionCalculator.CalculateVisiblePositions(7, 5, 2);
+        // Obstacle to the W
+        [Test]
+        public void VisionCalculator_ForAVisualRangeOf2AndObstacleToTheWest_CorrectlyCalculatesTheVisiblePositions()
+        {
+            obstacles.Add(new Position(6, 5));
+            List<Position> visiblePositions = visionCalculator.CalculateFieldOfView(new Position(7, 5), 2, obstacles);
 
-        //    Assert.That(visiblePositions.Count<Position>(), Is.EqualTo(12));
-        //    Assert.That(visiblePositions.Contains(new Position(7, 5)), Is.True);
-        //    Assert.That(visiblePositions.Contains(new Position(6, 5)), Is.True);
-        //    Assert.That(visiblePositions.Contains(new Position(5, 5)), Is.False);
-        //}
+            Assert.That(visiblePositions.Count, Is.EqualTo(12));
+            Assert.That(visiblePositions.Contains(new Position(7, 5)), Is.True);
+            Assert.That(visiblePositions.Contains(new Position(6, 5)), Is.True);
+            Assert.That(visiblePositions.Contains(new Position(5, 5)), Is.False);
+        }
 
-        //// Obstacle to the NW
-        //[Test]
-        //public void VisionCalculator_ForAVisualRangeOf2AndObstacleToTheNorthWest_CorrectlyCalculatesTheVisiblePositions()
-        //{
-        //    List<Position> visiblePositions = _visionCalculator.CalculateVisiblePositions(7, 4, 2);
+        // Obstacle to the NW
+        [Test]
+        public void VisionCalculator_ForAVisualRangeOf2AndObstacleToTheNorthWest_CorrectlyCalculatesTheVisiblePositions()
+        {
+            obstacles.Add(new Position(6, 5));
+            List<Position> visiblePositions = visionCalculator.CalculateFieldOfView(new Position(7, 4), 2, obstacles);
 
-        //    Assert.That(visiblePositions.Count<Position>(), Is.EqualTo(13));
-        //    Assert.IsTrue(visiblePositions.Contains(new Position(7, 4)));
-        //    Assert.IsTrue(visiblePositions.Contains(new Position(6, 5)));
-        //}
+            Assert.That(visiblePositions.Count, Is.EqualTo(13));
+            Assert.That(visiblePositions.Contains(new Position(7, 4)), Is.True);
+            Assert.That(visiblePositions.Contains(new Position(6, 5)), Is.True);
+        }
 
         ////--------------------------------
         //// LoS (Line of Sight) Calculation Examples
