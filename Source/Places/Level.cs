@@ -20,8 +20,13 @@ namespace Turnable.Places
         {
             TileMap = new TileMap(fullPath);
             Viewport = new Viewport(16, 16);
-            // Add an empty TileMapLayer for Characters (PCs and NPCs)
-            TileMap.Layers.Add(new TileMapLayer("Characters", TileMap.Bounds.Width, TileMap.Bounds.Height));
+            // Add an empty TileMapLayer for Characters (PCs and NPCs), if it does not already exist
+            if (!TileMap.Layers.Contains("Characters"))
+            {
+                TileMap.Layers.Add(new TileMapLayer("Characters", TileMap.Bounds.Width, TileMap.Bounds.Height));
+            }
+            // Add a player if one is pre-defined in the Characters layer
+
         }
 
         public Movement MovePlayerInDirection(Direction direction)

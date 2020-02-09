@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Turnable.Tiled;
 
 namespace Turnable.Utilities
@@ -29,6 +30,25 @@ namespace Turnable.Utilities
         public uint? GetTile(int x, int y, TileMapLayer layer)
         {
             return layer.GetTile(new Position(x, y));
+        }
+
+        public List<Position> GetTilePositions(uint tileId, int layerIndex)
+        {
+            List<Position> tilePositions = new List<Position>();
+
+            for (int col = 0; col < Bounds.Width; col++)
+            {
+                for (int row = 0; row < Bounds.Height; row++)
+                {
+                    Console.Write(GetTile(col, row, layerIndex));
+                    if (GetTile(col, row, layerIndex) == tileId)
+                    {
+                        tilePositions.Add(new Position(col, row));
+                    }
+                }
+            }
+
+            return tilePositions;
         }
     }
 }

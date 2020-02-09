@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using NUnit.Framework;
 using Turnable.Utilities;
@@ -53,6 +54,40 @@ namespace Tests.Tiled
         public void GetTile_GivenXYAndLayer_ReturnsATile()
         {
             Assert.That(tileMap.GetTile(0, 0, tileMap.Layers[0]), Is.EqualTo(223));
+        }
+
+        [Test]
+        public void FindTileIdWithProperty_GivenAPropertyNameAndValue_FindsTileIdWithThatPropoertySet()
+        {
+            var fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Fixtures\Characters.tsx");
+
+            var tileset = Tileset.Load(fullPath);
+
+            uint? foundTileId = tileset.FindTileIdWithProperty("Player", "true");
+
+            Assert.That(foundTileId, Is.Zero);
+        }
+
+        [Test]
+        public void FindTileIdWithProperty_GivenAPropertyNameAndValueThatDoesNotExist_ReturnsNull()
+        {
+            var fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Fixtures\Characters.tsx");
+
+            var tileset = Tileset.Load(fullPath);
+
+            uint? foundTileId = tileset.FindTileIdWithProperty("MissingProperty", "true");
+
+            Assert.That(foundTileId, Is.Null);
+        }
+
+
+        [Test]
+        public void GetTilePositions_GivenATileIdAndLayerIndex_ReturnsAllPositionsWithThatTile()
+        {
+            List<Position> tilePositions = tileMap.GetTilePositions(0, 1);
+
+            Assert.That(tilePositions.Count, Is.EqualTo(1));
+
         }
     }
 }

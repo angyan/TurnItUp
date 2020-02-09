@@ -21,7 +21,7 @@ namespace Tests.Pathfinding
         }
 
         [Test]
-        public void Constructor_GivenARectangle_InitializesAPathfinderWithTheRectangleAsBoundsAndAllowsDiagonalMovement()
+        public void Constructor_GivenABounds_InitializesAPathfinderWithTheBoundsAndAllowsDiagonalMovement()
         {
             var bounds = new Rectangle(new Position(0, 0), 5, 10);
 
@@ -32,7 +32,7 @@ namespace Tests.Pathfinding
         }
 
         [Test]
-        public void Constructor_GivenARectangleAndDisallowingDiagonalMovement_InitializesAPathfinderWithTheRectangleAsBoundsAndDisallowsDiagonalMovement()
+        public void Constructor_GivenABoundsAndDisallowingDiagonalMovement_InitializesAPathfinderWithTheBoundsAndDisallowsDiagonalMovement()
         {
             var bounds = new Rectangle(new Position(0, 0), 5, 10);
 
@@ -83,8 +83,8 @@ namespace Tests.Pathfinding
             Assert.That(path, Is.Not.Null);
             Assert.That(path.Count, Is.EqualTo(4));
             Assert.That(path[0], Is.EqualTo(new Position(1, 1)));
-            Assert.That(path[1], Is.EqualTo(new Position(2, 1)));
-            Assert.That(path[2], Is.EqualTo(new Position(3, 1)));
+            Assert.That(path[1], Is.EqualTo(new Position(2, 2)));
+            Assert.That(path[2], Is.EqualTo(new Position(3, 2)));
             Assert.That(path[3], Is.EqualTo(new Position(4, 1)));
         }
 

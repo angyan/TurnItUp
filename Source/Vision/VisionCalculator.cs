@@ -113,11 +113,11 @@ namespace Turnable.Vision
                     }
                     else
                     {
-                        if (obstacles.Countains(currentPosition) && distance < visualRange)
+                        if (obstacles.Contains(currentPosition) && distance < visualRange)
                         // Hit an obstacle within sight line
                         {
                             blocked = true;
-                            CastLight(visiblePositions, startX, startY, distance + 1, startSlope, leftSlope, visualRange, xx, xy, yx, yy);
+                            CastLight(visiblePositions, start, distance + 1, startSlope, leftSlope, visualRange, xx, xy, yx, yy, obstacles);
                             newStartSlope = rightSlope;
                         }
                     }
@@ -128,10 +128,4 @@ namespace Turnable.Vision
         }
 
     }
-}
-
-//namespace Turnable.Vision
-//{
-
-//    }
 }

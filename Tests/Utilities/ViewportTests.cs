@@ -291,28 +291,25 @@ namespace Tests.Places
         }
 
         [Test]
-        public void FocusOn_WhenThereIsNotEnoughSpaceAroundFocus_FocusesViewportAsMuchAsPossible()
+        public void FocusOn_WhenThereIsntEnoughOfTheMapToFillTheEntireViewport_FocusesViewportToMakeSureViewportIsFilled()
         {
             Viewport viewport = new Viewport(5, 5);
 
             // Bottom left
-            viewport.FocusOn(new Position(0, 0), level.TileMap.Bounds);
+            viewport.FocusOn(new Position(-1, -1), level.TileMap.Bounds);
             Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(0, 0)));
+            
+            // Bottom right
+            viewport.FocusOn(new Position(level.TileMap.Bounds.Width, -1), level.TileMap.Bounds);
+            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(level.TileMap.Bounds.Width - viewport.Bounds.Width, 0)));
 
-            //// Bottom right
-            //_level.Viewport.CenterAt(new Position(_level.Map.Width - 1, 0));
-            //Assert.That(_level.Viewport.MapLocation.X, Is.EqualTo(_level.Map.Width - ((IBounded)_level.Viewport).Bounds.Width));
-            //Assert.That(_level.Viewport.MapLocation.Y, Is.EqualTo(0));
+            // Top right
+            viewport.FocusOn(new Position(level.TileMap.Bounds.Width, level.TileMap.Bounds.Height), level.TileMap.Bounds);
+            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(level.TileMap.Bounds.Width - viewport.Bounds.Width, level.TileMap.Bounds.Height - viewport.Bounds.Height)));
 
-            //// Top right
-            //_level.Viewport.CenterAt(new Position(_level.Map.Width - 1, _level.Map.Height - 1));
-            //Assert.That(_level.Viewport.MapLocation.X, Is.EqualTo(_level.Map.Width - ((IBounded)_level.Viewport).Bounds.Width));
-            //Assert.That(_level.Viewport.MapLocation.Y, Is.EqualTo(_level.Map.Height - ((IBounded)_level.Viewport).Bounds.Height));
-
-            //// Top left
-            //_level.Viewport.CenterAt(new Position(0, _level.Map.Height - 1));
-            //Assert.That(_level.Viewport.MapLocation.X, Is.EqualTo(0));
-            //Assert.That(_level.Viewport.MapLocation.Y, Is.EqualTo(_level.Map.Height - ((IBounded)_level.Viewport).Bounds.Height));
+            // Top left
+            viewport.FocusOn(new Position(-1, level.TileMap.Bounds.Height), level.TileMap.Bounds);
+            Assert.That(viewport.Bounds.BottomLeft, Is.EqualTo(new Position(0, level.TileMap.Bounds.Height - viewport.Bounds.Height)));
         }
     }
 }

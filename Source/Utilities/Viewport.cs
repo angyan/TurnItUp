@@ -51,21 +51,32 @@ namespace Turnable.Places
 
         public void FocusOn(Position position, Rectangle tileMapBounds)
         {
-            Position newPosition = new Position(position.X - Bounds.Width / 2, position.Y - Bounds.Height / 2);
-
-            // If the viewport's bound's X value is invalid, set it to a valid value
-            if (newPosition.X < 0)
             {
-                newPosition.X = 0;
-            }
+                int x, y;
 
-            // If the viewport's bound's Y value is invalid, set it to a valid value
-            if (newPosition.Y < 0)
-            {
-                newPosition.Y = 0;
-            }
+                x = position.X - Bounds.Width / 2;
+                y = position.Y - Bounds.Height / 2;
 
-            Bounds.MoveTo(newPosition);
+                // When parts of the viewport are out of bounds of the Map, move the new MapOrigin to compensate
+                if ((Bounds.Width / 2 + position.X) > tileMapBounds.Width)
+                {
+                    x -= (Bounds.Width / 2 - (tileMapBounds.Width - position.X - 1));
+                }
+                if ((Bounds.Height / 2 + position.Y) > tileMapBounds.Height)
+                {
+                    y -= (Bounds.Height / 2 - (tileMapBounds.Height - position.Y - 1));
+                }
+                if (x < 0)
+                {
+                    x = 0;
+                }
+                if (y < 0)
+                {
+                    y = 0;
+                }
+
+                Bounds.MoveTo(new Position(x, y));
+            }
         }
     }
 }

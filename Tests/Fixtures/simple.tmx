@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-up" width="16" height="16" tilewidth="48" tileheight="48" infinite="0" nextlayerid="2" nextobjectid="1">
+ <tileset firstgid="1" source="../../../Arena of Valor/Assets/Levels/Terrain.tsx"/>
+ <layer id="1" name="Background" width="16" height="16">
+  <data encoding="base64" compression="zlib">
+   eJzzZGBg8BzFo3gUj0gMAJ6OSQE=
+  </data>
+ </layer>
+</map>
